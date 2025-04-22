@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}The Path to Homebuying{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <header>The Path to Homebuying:</header>
+        <nav class="navbar">
+            <a href="#">Home</a>
+            <a href="#">Glossary</a>
+        </nav>
+        {% block content %}{% endblock %}
+    </body>
+</html>

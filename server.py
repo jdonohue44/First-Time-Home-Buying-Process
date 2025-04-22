@@ -196,10 +196,9 @@ mortgage_options = [
 
 @app.route('/')
 def home():
-    timestamp = datetime.now().isoformat()
-    user_data["page_visits"].append({"step": "home", "time": timestamp})
-    return render_template('home.html')
+    return render_template('index.html')
 
+'''
 @app.route('/learn/<step_id>')
 def learn_page(step_id):
     timestamp = datetime.now().isoformat()
@@ -271,6 +270,7 @@ def get_cheatsheet():
     return jsonify(cheatsheet)
 
 # ========== LAUNCH ==========
+'''
 
 if __name__ == '__main__':
     app.run(debug=True)

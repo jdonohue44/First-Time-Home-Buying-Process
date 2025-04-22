@@ -1,7 +1,89 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    text-align: center;
-    padding-top: 50px;
+    margin: 0;
+    font-family: 'Times New Roman', serif;
+    background-color: white;
 }
 
+header {
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+    font-stretch: condensed;
+    font-size: 2.8rem;
+    font-weight:300;
+    margin-bottom: -10px;
+    position: relative;
+    z-index: 2;
+}
+
+.navbar {
+    background-color: #d3d3d3;
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding: 0.5rem 0;
+    position: relative;
+    border-top: 0.5px solid black;
+    border-bottom: 0.5px solid black;
+}
+
+.navbar::before, .navbar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+}
+
+.navbar::before {
+    top: -0.3px;
+}
+
+.navbar::after {
+    bottom: -1px;
+}
+
+.navbar a {
+    font-family: 'Times New Roman', serif;
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+    padding-left: 4rem;
+}
+
+.title {
+    text-align: center;
+    font-size: 3.5rem;
+    margin-top: 2rem;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.card {
+    background-color: #aaa;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Times New Roman', serif;
+    text-align: center;
+    padding: 1rem;
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.card-desc {
+    margin-top: 1rem;
+    font-size: 1rem;
+}

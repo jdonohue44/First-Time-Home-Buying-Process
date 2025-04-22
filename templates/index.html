@@ -1,11 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Flask App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <h1>Hello from Flask!</h1>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <div class="title">A Guide for First-Time Home Buyers</div>
+
+  <div class="content">
+    <div>
+        <div class="card">
+          <!-- Placeholder for stick figure -->
+          <div class="card-title">independent.</div>
+        </div>
+        <div class="card-desc">One income, potentially lower loan amount.</div>
+    </div>
+    <div>
+        <div class="card">
+          <!-- Placeholder for stick figure -->
+          <div class="card-title">partnered.</div>
+        </div>
+        <div class="card-desc">Combined income affects mortgage eligibility.</div>
+    </div>
+  </div>
+{% endblock %}
+
+
 
