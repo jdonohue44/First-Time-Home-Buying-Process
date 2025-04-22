@@ -2,7 +2,7 @@
 
 from flask import Flask
 from flask import render_template
-from flask import Response, request, jsonify
+from flask import Response, request, jsonify, redirect
 
 app = Flask(__name__)
 
@@ -208,6 +208,8 @@ def learn_page(step_id):
         return render_template("learn.html", step=step)
     else:
         return "Step not found", 404
+        
+'''
 
 @app.route('/quiz/<int:qid>', methods=["GET", "POST"])
 def quiz_page(qid):
@@ -220,7 +222,7 @@ def quiz_page(qid):
 
     question = quiz_data[qid - 1]
     return render_template("quiz.html", question=question, qid=qid)
-
+'''
 @app.route('/quiz/result')
 def quiz_result():
     score = 0

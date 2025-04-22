@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz – Question {{ qid }}{% endblock %}
+
+{% block content %}
+<div class="title">Quiz Question {{ qid }}</div>
+
+<div class="content">
+    <form method="POST" action="/quiz/{{ qid }}">
+        <div class="card" style="width: 600px;">
+            <div class="card-title">{{ question.question }}</div>
+            <div class="card-desc">
+                {% for option in question.options %}
+                <div style="margin: 10px 0;">
+                    <input type="radio" name="answer" value="{{ option }}" id="{{ option }}" required />
+                    <label for="{{ option }}">{{ option }}</label>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button type="submit">Next</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
