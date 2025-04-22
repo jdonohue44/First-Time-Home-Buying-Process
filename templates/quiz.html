@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Quiz – Question {{ qid }}{% endblock %}
+{% block title %}Quiz – Question {{ qid + 1 }}{% endblock %}
 
 {% block content %}
-<div class="title">Quiz Question {{ qid }}</div>
+<div class="title">Quiz Question {{ qid + 1 }}</div>
 
 <div class="content">
     <form method="POST" action="/quiz/{{ qid }}">

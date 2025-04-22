@@ -5,13 +5,15 @@ from flask import Flask
 from flask import render_template
 from flask_cors import CORS
 from flask import Response, request, jsonify, redirect, url_for
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app, origins=["http://127.0.0.1:5000", "http://localhost:5000"])
 
 # ========== IN-MEMORY USER DATA ==========
 user_data = {
-    "quiz_answers": {}
+    "quiz_answers": {},
+    "entry_times": {} 
 }
 
 # ========== LEARNING SECTION ==========
@@ -196,22 +198,24 @@ def home():
 
 @app.route('/quiz/<int:qid>', methods=["GET", "POST"])
 def quiz_page(qid):
+    # End condition: if qid is beyond available questions, go to result page
+    if qid >= len(quiz_data):
+        return redirect("/quiz/result")
+
     if request.method == "POST":
         answer = request.form.get("answer")
         user_data["quiz_answers"][str(qid)] = answer
         return redirect(f"/quiz/{qid + 1}")
 
-    if qid > len(quiz_data):
-        return redirect("/quiz/result")
-
-    question = quiz_data[qid - 1]
+    # No longer subtract 1 here
+    question = quiz_data[qid]
     return render_template("quiz.html", question=question, qid=qid)
 
 @app.route('/quiz/result')
 def quiz_result():
     score = 0
-    for q in quiz_data:
-        user_answer = user_data["quiz_answers"].get(str(q["id"]))
+    for qid, q in enumerate(quiz_data):
+        user_answer = user_data["quiz_answers"].get(str(qid))
         if user_answer == q["correctAnswer"]:
             score += 1
 
@@ -235,7 +239,15 @@ def start_learning():
 @app.route('/learning/<int:step_id>')
 def learning_step(step_id):
     if 0 <= step_id < len(learning_steps):
-        return render_template('learning.html', step=learning_steps[step_id], step_id=step_id, max_id=len(learning_steps) - 1)
+        # Track entry time for the learning step
+        user_data["entry_times"][step_id] = datetime.utcnow().isoformat()
+
+        return render_template(
+            'learning.html',
+            step=learning_steps[step_id],
+            step_id=step_id,
+            max_id=len(learning_steps) - 1
+        )
     return redirect(url_for('start_learning'))
 
 @app.route('/api/cheatsheet')
@@ -259,4 +271,4 @@ def get_mortgage_options():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='127.0.0.1')
