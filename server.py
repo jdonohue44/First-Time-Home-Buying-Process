@@ -209,7 +209,7 @@ def quiz_page(qid):
 
     # No longer subtract 1 here
     question = quiz_data[qid]
-    return render_template("quiz.html", question=question, qid=qid)
+    return render_template("quiz.html", question=question, qid=qid, user_data=user_data)
 
 @app.route('/quiz/result')
 def quiz_result():
@@ -229,6 +229,10 @@ def quiz_result():
                            quiz_data=quiz_data,
                            user_data=user_data  # passing answers to use in result.html
                            )
+
+@app.route('/glossary')
+def glossary_page():
+    return render_template("cheatsheet.html", cheatsheet=cheatsheet)
 
 
 # ========== API ROUTES ==========

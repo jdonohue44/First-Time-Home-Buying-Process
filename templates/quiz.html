@@ -12,16 +12,26 @@
             <div class="qcard-desc">
                 {% for option in question.options %}
                 <div style="margin: 10px 0;">
-                    <input type="radio" name="answer" value="{{ option }}" id="{{ option }}" required />
+                    <input type="radio" name="answer" value="{{ option }}" id="{{ option }}"
+                        {% if user_data['quiz_answers'][qid|string] == option %}checked{% endif %} required />
                     <label for="{{ option }}">{{ option }}</label>
                 </div>
                 {% endfor %}
             </div>
 
-            <div style="margin-top: 20px;">
-                <button type="submit">Next</button>
+            <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                {% if qid > 0 %}
+                <a href="{{ url_for('quiz_page', qid=qid - 1) }}"
+                   style="text-decoration: none; background-color: #d3d3d3; border: 1px solid black;
+                          color: black; padding: 8px 16px;">Back</a>
+                {% else %}
+                <div></div>
+                {% endif %}
+
+                <button type="submit" style="padding: 8px 16px;">Next</button>
             </div>
         </div>
     </form>
 </div>
 {% endblock %}
+

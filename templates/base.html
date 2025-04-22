@@ -13,7 +13,7 @@
         <a href="{{ url_for('home')}}" style="color: black; text-decoration: none;"><header id="pagetitle">The Path to Homebuying:</header></a>
         <nav class="pnavbar">
             <a href="{{ url_for('home')}}">Home</a>
-            <a href="#">Glossary</a>
+            <a href="{{ url_for('glossary_page') }}">Glossary</a>
         </nav>
         {% block content %}{% endblock %}
 

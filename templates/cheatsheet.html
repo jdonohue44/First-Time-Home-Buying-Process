@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Glossary{% endblock %}
+
+{% block content %}
+<div class="title">Glossary: Buying Alone vs With a Partner</div>
+
+<div class="glossary-wrapper">
+    {% for key, section in cheatsheet.items() %}
+        <div class="glossary-card">
+            <div class="card-title">{{ section.title }}</div>
+            <div class="card-desc">
+                <ul>
+                    {% for point in section.points %}
+                        <li>{{ point }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -174,4 +174,28 @@ header#pagetitle {
     word-wrap: break-word; /* ensures text wraps inside the limit */
     margin: 0 auto;
   }
+
+/* Glossary */
+.glossary-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+
+.glossary-card {
+    background-color: #aaa;
+    width: 300px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-family: 'Times New Roman', serif;
+    text-align: left;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
   
