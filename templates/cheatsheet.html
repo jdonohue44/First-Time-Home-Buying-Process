@@ -8,8 +8,8 @@
 <div class="glossary-wrapper">
     {% for key, section in cheatsheet.items() %}
         <div class="glossary-card">
-            <div class="card-title">{{ section.title }}</div>
-            <div class="card-desc">
+            <div class="pcard-title">{{ section.title }}</div>
+            <div class="pcard-desc">
                 <ul>
                     {% for point in section.points %}
                         <li>{{ point }}</li>
@@ -19,4 +19,6 @@
         </div>
     {% endfor %}
 </div>
+
+<a class="btn btn-secondary" href="{{ url_for('home')}}">← Previous</a>
 {% endblock %}
