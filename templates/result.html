@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz Results{% endblock %}
+
+{% block content %}
+<div class="title">Your Quiz Results</div>
+
+<div class="content" style="flex-direction: column; align-items: center; gap: 2rem;">
+
+    <div class="card" style="width: 600px;">
+        <div class="card-title">Score: {{ score }}%</div>
+        <div class="card-desc" style="margin-top: 1rem;">{{ message }}</div>
+
+        <div style="margin-top: 2rem;">
+            <a href="/" class="btn" style="text-decoration: none; padding: 0.5rem 1rem; background-color: black; color: white; border-radius: 5px;">Back to Home</a>
+            <a href="/quiz/1" class="btn" style="margin-left: 1rem; text-decoration: none; padding: 0.5rem 1rem; background-color: #666; color: white; border-radius: 5px;">Try Again</a>
+        </div>
+    </div>
+
+    <div style="margin-top: 3rem; width: 700px;">
+        <h2 style="font-family: 'Times New Roman', serif;">Your Answers</h2>
+        <ul style="list-style-type: none; padding: 0;">
+            {% for q in quiz_data %}
+                {% set user_answer = user_data["quiz_answers"].get(q["id"] | string) %}
+                {% set is_correct = user_answer == q["correctAnswer"] %}
+                <li style="margin-bottom: 2rem; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; background-color: {{ 'lightgreen' if is_correct else '#ffd6d6' }}">
+                    <strong>Q{{ q.id }}: {{ q.question }}</strong><br>
+                    Your Answer: <span style="font-weight: bold;">{{ user_answer }}</span> {% if is_correct %}✅{% else %}❌{% endif %}<br>
+                    Correct Answer: <em>{{ q.correctAnswer }}</em>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+{% endblock %}

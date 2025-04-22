@@ -216,13 +216,14 @@ def quiz_page(qid):
     if request.method == "POST":
         answer = request.form.get("answer")
         user_data["quiz_answers"][str(qid)] = answer
+        return redirect(f"/quiz/{qid + 1}")
 
     if qid > len(quiz_data):
         return redirect("/quiz/result")
 
     question = quiz_data[qid - 1]
     return render_template("quiz.html", question=question, qid=qid)
-'''
+
 @app.route('/quiz/result')
 def quiz_result():
     score = 0
@@ -235,8 +236,13 @@ def quiz_result():
     passed = percent >= quiz_summary["passThreshold"]
     message = quiz_summary["messages"]["pass"] if passed else quiz_summary["messages"]["fail"]
 
-    return render_template("result.html", score=percent, message=message)
-
+    return render_template("result.html",
+                           score=percent,
+                           message=message,
+                           quiz_data=quiz_data,
+                           user_data=user_data  # passing answers to use in result.html
+                           )
+'''
 # ========== API ROUTES ==========
 
 @app.route('/api/learning-steps')
