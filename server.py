@@ -1,10 +1,13 @@
 # Daniel Chung, dc3561
+# Othmane El Houss, oe2196
 
 from flask import Flask
 from flask import render_template
+from flask_cors import CORS
 from flask import Response, request, jsonify, redirect
 
 app = Flask(__name__)
+CORS(app, origins=["http://127.0.0.1:5000", "http://localhost:5000"])
 
 # ========== IN-MEMORY USER DATA ==========
 user_data = {
@@ -142,17 +145,19 @@ cheatsheet = {
     "solo": {
         "title": "Buying Alone",
         "points": [
-            "Judged solely on your income and credit",
-            "Full control over decisions",
-            "Lower qualification without strong finances"
+            "You are judged solely on your credit, income, debt, and assets.",
+            "Lower qualification if your income isn't high or your credit score isn’t excellent.",
+            "If you're strong financially, it's often cleaner and faster.",
+            "You have full control over decisions."
         ]
     },
     "partner": {
         "title": "Buying With a Partner",
         "points": [
-            "Combined income increases eligibility",
-            "Both credit scores and debts are considered",
-            "One partner’s weak finances can hurt application"
+            "Combined income boosts purchasing power.",
+            "Both credit scores and debts are considered.",
+            "If one partner has poor credit or high debt, it may hurt more than help.",
+            "Lenders assess joint DTI and both employment situations."
         ]
     }
 }
@@ -211,6 +216,7 @@ def learn_page(step_id):
         
 '''
 
+'''
 @app.route('/quiz/<int:qid>', methods=["GET", "POST"])
 def quiz_page(qid):
     if request.method == "POST":
@@ -223,6 +229,7 @@ def quiz_page(qid):
 
     question = quiz_data[qid - 1]
     return render_template("quiz.html", question=question, qid=qid)
+
 
 @app.route('/quiz/result')
 def quiz_result():
@@ -243,6 +250,8 @@ def quiz_result():
                            user_data=user_data  # passing answers to use in result.html
                            )
 '''
+
+
 # ========== API ROUTES ==========
 
 @app.route('/api/learning-steps')
@@ -251,9 +260,7 @@ def get_learning_steps():
 
 @app.route('/api/cheatsheet')
 def get_cheatsheet():
-    return jsonify({
-        "cheatsheet": cheatsheet
-    })
+    return jsonify({"cheatsheet": cheatsheet})
 
 @app.route('/api/roles')
 def get_roles():
@@ -273,12 +280,9 @@ def get_quiz_summary():
 def get_mortgage_options():
     return jsonify(mortgage_options)
 
-@app.route('/api/cheatsheet')
-def get_cheatsheet():
-    return jsonify(cheatsheet)
 
 # ========== LAUNCH ==========
-'''
+
 
 if __name__ == '__main__':
     app.run(debug=True)

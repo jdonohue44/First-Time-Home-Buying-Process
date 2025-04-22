@@ -1,3 +1,4 @@
+/* General body and page styles */
 body {
     margin: 0;
     font-family: 'Times New Roman', serif;
@@ -9,7 +10,7 @@ header#pagetitle {
     font-family: 'Times New Roman', serif;
     font-stretch: condensed;
     font-size: 2.8rem;
-    font-weight:300;
+    font-weight: 300;
     margin-bottom: -19px;
     margin-top: 15px;
     position: relative;
@@ -27,7 +28,6 @@ header#pagetitle {
     border-bottom: 0.5px solid black;
 }
 
-
 .pnavbar a {
     font-family: 'Times New Roman', serif;
     text-decoration: none;
@@ -42,6 +42,8 @@ header#pagetitle {
     font-size: 3.5rem;
     margin-top: 2rem;
 }
+
+/* Card style adjustments */
 .pcard {
     background-color: #aaa;
     width: 250px;
@@ -56,12 +58,13 @@ header#pagetitle {
     margin: 0 auto; /* centers the card horizontally within the column */
 }
 
+/* Hover effect */
 .pcard:hover {
     background-color: #A4BE5C;
-    cursor: pointer; /* optional: shows it's interactive */
+    cursor: pointer;
 }
 
-
+/* Card images */
 .pcard #single {
     width: 25%;
 }
@@ -70,12 +73,14 @@ header#pagetitle {
     width: 50%;
 }
 
+/* Card titles */
 .pcard-title {
     font-weight: bold;
     font-size: 1.2rem;
     margin-top: 1rem;
 }
 
+/* Card descriptions */
 .pcard-desc {
     margin-top: 1rem;
     font-size: 1rem;
@@ -84,4 +89,57 @@ header#pagetitle {
     word-wrap: break-word; /* ensures text wraps inside the limit */
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Animation and center card styles */
+.centered-pcard {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    /*Add special keyframes for #independent and #partnered here*/
+}
+
+/* Text below the cards */
+.pcard-text {
+    margin-top: 1rem;
+    font-size: 1rem;
+    text-align: center;
+    max-width: 250px;
+    word-wrap: break-word;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Panning animation for independent and partnered cards */
+.pcard-container {
+    position: relative;
+}
+
+@keyframes panFromLeft {
+    0% {
+        transform: translateX(-20%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes panFromRight {
+    0% {
+        transform: translateX(20%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+/* Animation triggers */
+.animate-from-left {
+    animation: panFromLeft 0.2s forwards;
+}
+
+.animate-from-right {
+    animation: panFromRight 0.2s forwards;
 }

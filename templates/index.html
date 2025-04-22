@@ -11,27 +11,53 @@
     <div class="col-4"></div>
   </div>
 
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" id="card-row">
     <div class="col-md-6">
       <div class="row text-center">
-        <div class="col-md-6">
-          <div class="pcard">
+        <!-- Independent Card -->
+        <div class="col-md-6 pcard-container" id="independent-card">
+          <div class="pcard" onclick="selectCard('independent')">
             <img src="{{ url_for('static', filename='img/single-stick.png') }}" id="single" alt="Independent">
             <div class="pcard-title">independent.</div>
           </div>
-          <div class="pcard-desc">One income, potentially lower loan amount.</div>
+          <div id="independent-text" class="pcard-text">
+            One income, potentially lower loan amount.
+          </div>
         </div>
-        <div class="col-md-6">
-          <div class="pcard">
+
+        <!-- Partnered Card -->
+        <div class="col-md-6 pcard-container" id="partnered-card">
+          <div class="pcard" onclick="selectCard('partnered')">
             <img src="{{ url_for('static', filename='img/duo-stick.png') }}" id="duo" alt="Partnered">
             <div class="pcard-title">partnered.</div>
           </div>
-          <div class="pcard-desc">Combined income affects mortgage eligibility.</div>
+          <div id="partnered-text" class="pcard-text">
+            Combined income affects mortgage eligibility.
+          </div>
         </div>
       </div>
     </div>
   </div>
+  
+  <!-- Expanded Content Area -->
+  <div class="row justify-content-center mt-4 d-none" id="expanded-content">
+    <div class="col-md-6 text-center">
+      <div id="expanded-text"></div>
+      
+      <div class="d-flex justify-content-center align-items-center gap-3 mt-3">
+        <button class="btn btn-success" style="background-color: #A4BE5C; border-color: #A4BE5C; font-size: 1.1rem; padding: 0.6rem 1.2rem;">
+          Start Learning
+        </button>
+        <button class="btn" onclick="resetCards()" style="background: none; border: none; color: black; text-decoration: underline; font-size: 1rem;">
+          Return
+        </button>
+      </div>
+      
+    </div>
+  </div>
+
 {% endblock %}
 
-
-
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
