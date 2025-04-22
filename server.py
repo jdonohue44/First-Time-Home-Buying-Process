@@ -204,19 +204,6 @@ def home():
     return render_template('index.html')
 
 '''
-@app.route('/learn/<step_id>')
-def learn_page(step_id):
-    timestamp = datetime.now().isoformat()
-    user_data["page_visits"].append({"step": step_id, "time": timestamp})
-    step = next((s for s in learning_steps if s["id"] == step_id), None)
-    if step:
-        return render_template("learn.html", step=step)
-    else:
-        return "Step not found", 404
-        
-'''
-
-'''
 @app.route('/quiz/<int:qid>', methods=["GET", "POST"])
 def quiz_page(qid):
     if request.method == "POST":
@@ -261,12 +248,6 @@ def get_learning_steps():
 @app.route('/api/cheatsheet')
 def get_cheatsheet():
     return jsonify({"cheatsheet": cheatsheet})
-
-@app.route('/api/roles')
-def get_roles():
-    return jsonify({
-        "roles": people_roles
-    })
 
 @app.route('/api/quiz')
 def get_quiz():
