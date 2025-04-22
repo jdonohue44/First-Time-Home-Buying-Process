@@ -4,30 +4,20 @@
 from flask import Flask
 from flask import render_template
 from flask_cors import CORS
-from flask import Response, request, jsonify, redirect
+from flask import Response, request, jsonify, redirect, url_for
 
 app = Flask(__name__)
 CORS(app, origins=["http://127.0.0.1:5000", "http://localhost:5000"])
 
 # ========== IN-MEMORY USER DATA ==========
 user_data = {
-    "page_visits": [],
     "quiz_answers": {}
 }
 
 # ========== LEARNING SECTION ==========
 learning_steps = [
     {
-        "id": "home",
-        "title": "Learn How to Buy a Home",
-        "content": [
-            "A step-by-step guide to buying your first home in under 10 minutes.",
-            "Choose whether you're buying solo or with a partner to begin."
-        ],
-        "options": ["Solo", "With a Partner"]
-    },
-    {
-        "id": "preapproval",
+        "id": 0,
         "title": "Get Pre-Approved by Your Bank",
         "content": [
             "Your bank will review your finances to give you a price range.",
@@ -40,7 +30,7 @@ learning_steps = [
         "hint": "Lenders want stable income, low debt, and savings."
     },
     {
-        "id": "tour",
+        "id": 1,
         "title": "Tour Homes",
         "content": [
             "Visit houses within your pre-approved amount.",
@@ -51,7 +41,7 @@ learning_steps = [
         "hint": "Act fast in hot markets—homes move quickly!"
     },
     {
-        "id": "agent",
+        "id": 2,
         "title": "Find a Real Estate Agent",
         "content": [
             "Choose someone who knows your target area well.",
@@ -61,7 +51,7 @@ learning_steps = [
         "hint": "An agent can help you find hidden listings and make competitive offers."
     },
     {
-        "id": "offer",
+        "id": 3,
         "title": "Make an Offer",
         "content": [
             "Submit your best offer with pre-approval and proof of funds.",
@@ -72,7 +62,7 @@ learning_steps = [
         "hint": "A strong offer improves your chances, especially in competitive markets."
     },
     {
-        "id": "mortgage",
+        "id": 4,
         "title": "Finalize Your Mortgage & Close the Sale",
         "content": [
             "Lock in your interest rate and finalize the paperwork.",
@@ -88,14 +78,14 @@ learning_steps = [
 
 quiz_data = [
     {
-        "id": 1,
+        "id": 0,
         "question": "What is the recommended DTI (Debt-to-Income) ratio for most home loans?",
         "options": ["Exactly 40%", "Under 43%", "Over 50%", "It doesn’t matter"],
         "correctAnswer": "Under 43%",
         "hint": "Lenders generally want to minimize risk—lower DTI is better."
     },
     {
-        "id": 2,
+        "id": 1,
         "question": "Why is a 2+ year history of income preferred by lenders?",
         "options": [
             "To verify your identity",
@@ -107,7 +97,7 @@ quiz_data = [
         "hint": "Lenders prefer consistent earnings to ensure you can repay the loan."
     },
     {
-        "id": 3,
+        "id": 2,
         "question": "What do lenders want to see in your bank statements for down payment and reserves?",
         "options": [
             "Loan repayment records",
@@ -119,7 +109,7 @@ quiz_data = [
         "hint": "Reserves give lenders confidence you can handle payments after closing."
     },
     {
-        "id": 4,
+        "id": 3,
         "question": "Which of these statements is incorrect about buying with a partner?",
         "options": [
             "Combined income boosts purchasing power.",
@@ -203,7 +193,7 @@ mortgage_options = [
 def home():
     return render_template('index.html')
 
-'''
+
 @app.route('/quiz/<int:qid>', methods=["GET", "POST"])
 def quiz_page(qid):
     if request.method == "POST":
@@ -216,7 +206,6 @@ def quiz_page(qid):
 
     question = quiz_data[qid - 1]
     return render_template("quiz.html", question=question, qid=qid)
-
 
 @app.route('/quiz/result')
 def quiz_result():
@@ -236,14 +225,18 @@ def quiz_result():
                            quiz_data=quiz_data,
                            user_data=user_data  # passing answers to use in result.html
                            )
-'''
 
 
 # ========== API ROUTES ==========
+@app.route('/start-learning')
+def start_learning():
+    return redirect(url_for('learning_step', step_id=0))
 
-@app.route('/api/learning-steps')
-def get_learning_steps():
-    return jsonify(learning_steps)
+@app.route('/learning/<int:step_id>')
+def learning_step(step_id):
+    if 0 <= step_id < len(learning_steps):
+        return render_template('learning.html', step=learning_steps[step_id], step_id=step_id, max_id=len(learning_steps) - 1)
+    return redirect(url_for('start_learning'))
 
 @app.route('/api/cheatsheet')
 def get_cheatsheet():

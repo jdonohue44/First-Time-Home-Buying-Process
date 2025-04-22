@@ -7,9 +7,9 @@
 
 <div class="content">
     <form method="POST" action="/quiz/{{ qid }}">
-        <div class="card" style="width: 600px;">
-            <div class="card-title">{{ question.question }}</div>
-            <div class="card-desc">
+        <div class="qcard" style="width: 600px;">
+            <div class="qcard-title">{{ question.question }}</div>
+            <div class="qcard-desc">
                 {% for option in question.options %}
                 <div style="margin: 10px 0;">
                     <input type="radio" name="answer" value="{{ option }}" id="{{ option }}" required />

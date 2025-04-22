@@ -10,9 +10,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xJ+lRvElKq0gIH6EyKRnoCMH39OtzMHeI7OlD2Rv5EFq1U3gQGuM6QmT+4+M7Iwe" crossorigin="anonymous"></script>
     </head>
     <body>
-        <header id="pagetitle">The Path to Homebuying:</header>
+        <a href="{{ url_for('home')}}" style="color: black; text-decoration: none;"><header id="pagetitle">The Path to Homebuying:</header></a>
         <nav class="pnavbar">
-            <a href="#">Home</a>
+            <a href="{{ url_for('home')}}">Home</a>
             <a href="#">Glossary</a>
         </nav>
         {% block content %}{% endblock %}

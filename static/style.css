@@ -143,3 +143,35 @@ header#pagetitle {
 .animate-from-right {
     animation: panFromRight 0.2s forwards;
 }
+
+
+/*Quiz*/
+.qcard {
+    background-color: #f2f2f2; /* light grey */
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 0 auto; /* center horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    font-family: 'Times New Roman', serif;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .qcard-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    text-align: center;
+  }
+  
+  .qcard-desc {
+    margin-top: 1rem;
+    font-size: 1rem;
+    word-wrap: break-word; /* ensures text wraps inside the limit */
+    margin: 0 auto;
+  }
+  
