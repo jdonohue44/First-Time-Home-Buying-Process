@@ -5,20 +5,30 @@
 {% block content %}
   <div class="title">A Guide for First-Time Home Buyers</div>
 
-  <div class="content">
-    <div>
-        <div class="card">
-          <!-- Placeholder for stick figure -->
-          <div class="card-title">independent.</div>
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4"><hr></div>
+    <div class="col-4"></div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="row text-center">
+        <div class="col-md-6">
+          <div class="pcard">
+            <img src="{{ url_for('static', filename='img/single-stick.png') }}" id="single" alt="Independent">
+            <div class="pcard-title">independent.</div>
+          </div>
+          <div class="pcard-desc">One income, potentially lower loan amount.</div>
         </div>
-        <div class="card-desc">One income, potentially lower loan amount.</div>
-    </div>
-    <div>
-        <div class="card">
-          <!-- Placeholder for stick figure -->
-          <div class="card-title">partnered.</div>
+        <div class="col-md-6">
+          <div class="pcard">
+            <img src="{{ url_for('static', filename='img/duo-stick.png') }}" id="duo" alt="Partnered">
+            <div class="pcard-title">partnered.</div>
+          </div>
+          <div class="pcard-desc">Combined income affects mortgage eligibility.</div>
         </div>
-        <div class="card-desc">Combined income affects mortgage eligibility.</div>
+      </div>
     </div>
   </div>
 {% endblock %}
