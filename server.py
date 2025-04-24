@@ -234,6 +234,10 @@ def quiz_result():
 def glossary_page():
     return render_template("cheatsheet.html", cheatsheet=cheatsheet)
 
+@app.route("/timeline")
+def timeline():
+    return render_template("timeline.html")
+
 
 # ========== API ROUTES ==========
 @app.route('/start-learning')
