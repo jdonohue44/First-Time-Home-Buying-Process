@@ -198,4 +198,135 @@ header#pagetitle {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
+/* Interactive Timeline Page */
+.timeline-wrapper {
+    position: relative;
+    overflow-x: auto;
+    padding: 20px 0;
+  }
+
+  .timeline-arrow-container {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .arrow-shaft {
+    display: flex;
+    background-color: #a0a0a0;
+    padding: 20px;
+    border-radius: 1px;
+  }
+
+  .arrow-head {
+    width: 120px;
+    height: 200px;
+    background-color: #a0a0a0;
+    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+    margin-left: -1px;
+    /* join with shaft */
+  }
+
+  .timeline-slot {
+    width: 150px;
+    height: 100px;
+    background-color: #e2e2e2;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    border: 2px dashed #aaa;
+    border-radius: 4px;
+  }
+
+
+  .timeline-background {
+    background: url('/static/img/arrow-line.svg') center center repeat-x;
+    background-size: 200px 10px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 10px;
+    transform: translateY(-50%);
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+
+  .timeline-background {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: repeating-linear-gradient(to right, #adb5bd, #adb5bd 20px, transparent 20px, transparent 40px);
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+
+  .timeline-container {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+    /* above the background arrow */
+  }
+
+  .timeline-background {
+    background: url('/static/img/arrow-line.svg') center center repeat-x;
+    background-size: contain;
+  }
+
+
+  .timeline-slot.filled {
+    background: #ffffff;
+    border-style: solid;
+  }
+
+  .timeline-arrow {
+    font-size: 24px;
+    color: #6c757d;
+    user-select: none;
+  }
+
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .step {
+    cursor: grab;
+    margin: 8px;
+    padding: 10px 16px;
+    background: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+  }
+
+  .step:hover {
+    background: #f1f3f5;
+  }
+
+  .correct {
+    border-color: #198754 !important;
+    background-color: #d1e7dd !important;
+  }
+
+  .incorrect {
+    border-color: #dc3545 !important;
+    background-color: #f8d7da !important;
+  }
+
+  .btn-row {
+    margin-top: 20px;
+  }
   

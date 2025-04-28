@@ -30,7 +30,7 @@
                 💡 <strong>Hint:</strong> {{ step.hint }}
             </div>
 
-            <div class="d-flex justify-content-between mt-4">
+            <div class="d-flex justify-content-between mt-4 mb-4">
                 {% if step.id > 0 %}
                     <a class="btn btn-secondary" href="{{ url_for('learning_step', step_id=step.id - 1) }}">← Previous</a>
                 {% else %}
@@ -39,7 +39,7 @@
                 {% if step.id < max_id %}
                     <a class="btn btn-primary" href="{{ url_for('learning_step', step_id=step.id + 1) }}">Next →</a>
                 {% else %}
-                    <a class="btn btn-success" href="{{ url_for('quiz_page', qid=0) }}">📝 Take Quiz</a>
+                    <a class="btn btn-primary" href="{{ url_for('timeline') }}">📝 Review Home Buying Timeline</a>
                 {% endif %}
             </div>
         </div>

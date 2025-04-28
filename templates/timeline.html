@@ -1,281 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Home Buying Timeline</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      background: #f8f9fa;
-      font-family: 'Segoe UI', sans-serif;
-    }
+{% extends "base.html" %}
 
-    .timeline-wrapper {
-    position: relative;
-    overflow-x: auto;
-    padding: 20px 0;
-    }
+{% block content %}
 
-    .timeline-arrow-container {
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  margin: 0 auto;
-  position: relative;
-}
+<div class="container mt-5">
+  <div class="row justify-content-center">
 
-.arrow-shaft {
-  display: flex;
-  background-color: #a0a0a0;
-  padding: 20px;
-  border-radius: 1px;
-}
+    <h2 class="mb-4 mt-4" style="font-family: 'Times New Roman', serif;">Complete the Home Buying Timeline</h2>
 
-.arrow-head {
-  width: 120px;
-  height: 200px;
-  background-color: #a0a0a0;
-  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-  margin-left: -1px; /* join with shaft */
-}
+    <!-- Step Bank -->
+    <div id="steps" class="d-flex flex-wrap mb-4"></div>
 
-.timeline-slot {
-  width: 150px;
-  height: 100px;
-  background-color: #e2e2e2;
-  margin: 0 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 500;
-  border: 2px dashed #aaa;
-  border-radius: 4px;
-}
-
-
-    .timeline-background {
-    background: url('/static/img/arrow-line.svg') center center repeat-x;
-    background-size: 200px 10px;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 10px;
-    transform: translateY(-50%);
-    z-index: 0;
-    opacity: 0.6;
-    }
-
-
-    .timeline-background {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 10px;
-    background: repeating-linear-gradient(to right, #adb5bd, #adb5bd 20px, transparent 20px, transparent 40px);
-    transform: translateY(-50%);
-    z-index: 0;
-    }
-
-    .timeline-container {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 12px;
-    position: relative;
-    z-index: 1; /* above the background arrow */
-    }
-
-    .timeline-background {
-    background: url('/static/img/arrow-line.svg') center center repeat-x;
-    background-size: contain;
-    }
-
-
-    .timeline-slot.filled {
-      background: #ffffff;
-      border-style: solid;
-    }
-
-    .timeline-arrow {
-      font-size: 24px;
-      color: #6c757d;
-      user-select: none;
-    }
-
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .step {
-      cursor: grab;
-      margin: 8px;
-      padding: 10px 16px;
-      background: #ffffff;
-      border: 1px solid #ced4da;
-      border-radius: 4px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-      transition: all 0.2s;
-    }
-
-    .step:hover {
-      background: #f1f3f5;
-    }
-
-    .correct {
-      border-color: #198754 !important;
-      background-color: #d1e7dd !important;
-    }
-
-    .incorrect {
-      border-color: #dc3545 !important;
-      background-color: #f8d7da !important;
-    }
-
-    .btn-row {
-      margin-top: 20px;
-    }
-  </style>
-</head>
-<body class="container py-5">
-
-  <h2 class="mb-4">🏡 Complete the Home Buying Timeline</h2>
-
-  <!-- Step Bank -->
-  <!-- <h5>Available Steps:</h5> -->
-  <div id="steps" class="d-flex flex-wrap mb-4"></div>
-
-  <!-- Timeline -->
-  <!-- <h5>Timeline:</h5> -->
-  <div class="timeline-arrow-container mb-4">
-    <div class="arrow-shaft">
-      <div class="timeline-slot" data-slot="1">Drop Step</div>
-      <div class="timeline-slot" data-slot="2">Drop Step</div>
-      <div class="timeline-slot" data-slot="3">Drop Step</div>
-      <div class="timeline-slot" data-slot="4">Drop Step</div>
-      <div class="timeline-slot" data-slot="5">Drop Step</div>
-      <div class="timeline-slot" data-slot="6">Drop Step</div>
+    <!-- Timeline -->
+    <!-- <h5>Timeline:</h5> -->
+    <div class="timeline-arrow-container mb-4">
+      <div class="arrow-shaft" style="font-family: 'Times New Roman', serif;">
+        <div class="timeline-slot" data-slot="1">Drop Step</div>
+        <div class="timeline-slot" data-slot="2">Drop Step</div>
+        <div class="timeline-slot" data-slot="3">Drop Step</div>
+        <div class="timeline-slot" data-slot="4">Drop Step</div>
+        <div class="timeline-slot" data-slot="5">Drop Step</div>
+        <div class="timeline-slot" data-slot="6">Drop Step</div>
+      </div>
+      <div class="arrow-head"></div>
     </div>
-    <div class="arrow-head"></div>
+
+    <!-- Buttons -->
+    <div class="btn-row d-flex gap-3 mb-4">
+      <div class="btn-row d-flex justify-content-center gap-3">
+        <button id="resetBtn" class="btn btn-secondary btn-lg">🔄 Reset</button>
+        <button 
+          id="checkOrderBtn" 
+          class="btn btn-success btn-lg" 
+          disabled 
+          style="font-family: 'Times New Roman', serif;" 
+          data-bs-toggle="tooltip" 
+          data-bs-placement="top" 
+          title="Drag all steps into the timeline before checking">
+          ✅ Check Order
+      </button>
+      <button 
+        id="takeQuizBtn" 
+        class="btn btn-outline-danger btn-lg" 
+        style="font-family: 'Times New Roman', serif;" 
+        disabled
+        data-quiz-url="{{ url_for('quiz_page', qid=0) }}">
+        📝 Take Quiz
+      </button>
+      </div>      
+    </div>
+    <div id="resultMessage" class="mt-3 fw-bold"></div>
   </div>
-  
+</div>
 
-  <!-- Buttons -->
-  <div class="btn-row d-flex gap-3">
-    <!-- <button id="checkOrderBtn" class="btn btn-primary">✅ Check Order</button> -->
-    <button id="checkOrderBtn" class="btn btn-primary" disabled>✅ Check Order</button>
-    <button id="resetBtn" class="btn btn-outline-secondary">🔄 Reset</button>
-  </div>
-  <div id="resultMessage" class="mt-3 fw-bold"></div>
+{% endblock %}
 
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-  <script>
-    const correctOrder = [
-      "Find a Real Estate Agent",
-      "Get Approval",
-      "Tour Homes",
-      "Make an Offer",
-      "Finalize a Mortgage",
-      "Close the Sale"
-    ];
-
-    const createStep = (text) => $(`<div class="step" draggable="true">${text}</div>`);
-
-    function makeDraggable($el) {
-      $el.draggable({
-        helper: "clone",
-        revert: "invalid",
-        appendTo: 'body',
-        zIndex: 1000,
-        start: function (event, ui) {
-          ui.helper.css('width', $(this).width());  // keep size consistent
-        }
-      });
-    }
-
-    function renderStepBank() {
-      $("#steps").empty();
-      correctOrder.forEach(text => {
-        const $step = createStep(text);
-        $("#steps").append($step);
-        makeDraggable($step);
-      });
-    }
-
-    function resetTimeline() {
-      $(".timeline-slot").each(function () {
-        $(this).removeClass("filled correct incorrect").text("Drop Step");
-      });
-      $("#resultMessage").text("");
-      renderStepBank();
-    }
-
-    function updateCheckButtonState() {
-      const filled = $(".timeline-slot").filter(function () {
-        return $(this).text().trim() !== "Drop Step";
-      }).length;
-      $("#checkOrderBtn").prop("disabled", filled < 6);
-    }
-
-
-    $(function () {
-      renderStepBank();
-
-      $(".timeline-slot, #steps").droppable({
-        accept: ".step",
-        hoverClass: "bg-warning",
-        drop: function (event, ui) {
-          const $dropped = ui.draggable.clone().removeClass("ui-draggable-dragging");
-          const fromSteps = ui.draggable.parent().attr("id") === "steps";
-
-          const $target = $(this);
-          if ($target.hasClass("timeline-slot")) {
-            if ($target.children().length > 0) {
-              $("#steps").append($target.children().detach());
-            }
-            $target.empty().append($dropped).addClass("filled");
-          } else {
-            $("#steps").append($dropped);
-          }
-
-          ui.draggable.remove();
-          makeDraggable($dropped);
-          updateCheckButtonState();
-        }
-      });
-
-      $("#checkOrderBtn").click(function () {
-        const allFilled = $(".timeline-slot").filter(function () {
-          return $(this).text().trim() === "Drop Step";
-        }).length === 0;
-
-        if (!allFilled) {
-          $("#resultMessage").text("⚠️ Please complete all timeline steps before checking.");
-          return;
-        }
-
-        let allCorrect = true;
-        $(".timeline-slot").each(function (i) {
-          const actual = $(this).text().trim();
-          $(this).removeClass("correct incorrect");
-          if (actual === correctOrder[i]) {
-            $(this).addClass("correct");
-          } else {
-            $(this).addClass("incorrect");
-            allCorrect = false;
-          }
-        });
-
-  $("#resultMessage").text(allCorrect ? "✅ Correct Order!" : "❌ Some steps are incorrect. Try again!");
-});
-
-      $("#resetBtn").click(resetTimeline);
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/timeline.js') }}"></script>
+<script>
+  $(function() {
+    $("#takeQuizBtn").click(function() {
+      window.location.href = "{{ url_for('quiz_page', qid=0) }}"; 
     });
-  </script>
-
-</body>
-</html>
+  });
+</script>
+{% endblock %}
