@@ -238,6 +238,14 @@ def glossary_page():
 def timeline():
     return render_template("timeline.html")
 
+@app.route("/players")
+def players():
+    return render_template("players.html")
+
+@app.route("/players-interactive")
+def players_interactive():
+    return render_template("players-interactive.html")
+
 
 # ========== API ROUTES ==========
 @app.route('/start-learning')

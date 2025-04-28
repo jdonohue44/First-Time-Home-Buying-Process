@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid mt-5">
+    <div class="row g-0">
+      <!-- LEFT SIDE -->
+      <div class="col-12 col-md-8">
+        <div class="row g-0">
+          <div class="col-6 d-flex justify-content-center">
+
+            <div class="player-card">
+              <img src="{{ url_for('static', filename='img/agent.png') }}" class="player-img">
+              <h6>AGENT</h6>
+              <div class="dropzone">Drag Here</div>
+            </div>
+          </div>
+          <div class="col-6 d-flex justify-content-center">
+            <div class="player-card">
+              <img src="{{ url_for('static', filename='img/seller.png') }}" class="player-img">
+              <h6>SELLER</h6>
+              <div class="dropzone">Drag Here</div>
+            </div>
+          </div>
+          <div class="col-6 d-flex justify-content-center mt-4">
+            <div class="player-card">
+              <img src="{{ url_for('static', filename='img/buyer.png') }}" class="player-img">
+              <h6>BUYER</h6>
+              <div class="dropzone">Drag Here</div>
+            </div>
+          </div>
+          <div class="col-6 d-flex justify-content-center mt-4">
+            <div class="player-card">
+              <img src="{{ url_for('static', filename='img/lawyer.png') }}" class="player-img">
+              <h6>LAWYER</h6>
+              <div class="dropzone">Drag Here</div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- RIGHT SIDE: Descriptions -->
+      <div class="col-12 col-md-4 align-self-center">
+        <div id="descriptions">
+          <div class="draggable-desc" data-role="agent">A licensed professional who represents buyers or sellers through the home buying or selling process.</div>
+          <div class="draggable-desc" data-role="buyer">The individual seeking to purchase a home, responsible for securing financing and making an offer.</div>
+          <div class="draggable-desc" data-role="seller">The current homeowner listing the property for sale and negotiating terms with prospective buyers.</div>
+          <div class="draggable-desc" data-role="lawyer">A legal expert who ensures the contract comply with local laws, reviews documents and resolves disputes.</div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
+
+            <!-- Buttons Row -->
+            <div class="d-flex justify-content-between mt-4 mb-4">
+                <a href="{{ url_for('players') }}" class="btn btn-secondary">Previous</a>
+                <div>
+                    <button id="resetButton" class="btn btn-warning mr-2">Reset</button>
+                    <button id="checkButton" class="btn btn-success" disabled>Check Answers</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(function () {
+        $(".draggable-desc").draggable({
+            revert: "invalid",
+            helper: "clone"
+        });
+
+        $(".dropzone").droppable({
+            accept: ".draggable-desc",
+            over: function(event, ui) {
+                $(this).addClass("active-hover");
+            },
+            out: function(event, ui) {
+                $(this).removeClass("active-hover");
+            },
+            drop: function(event, ui) {
+                var dropped = $(ui.draggable).clone();
+                $(this).html(dropped).removeClass("correct incorrect active-hover").addClass("dropped");
+                
+                // New line: remove the original from the list
+                $(ui.draggable).remove();
+
+                checkIfAllDropped();
+            }
+        });
+
+
+        function checkIfAllDropped() {
+            let allFilled = true;
+            $(".dropzone").each(function () {
+                if ($(this).children().length === 0) {
+                    allFilled = false;
+                }
+            });
+            $("#checkButton").prop("disabled", !allFilled);
+        }
+
+        $("#checkButton").click(function () {
+            $(".dropzone").each(function () {
+                var correctRole = $(this).attr("data-correct");
+                var droppedRole = $(this).find(".draggable-desc").attr("data-role");
+
+                if (correctRole === droppedRole) {
+                    $(this).removeClass("incorrect").addClass("correct");
+                } else {
+                    $(this).removeClass("correct").addClass("incorrect");
+                }
+            });
+        });
+
+        $("#resetButton").click(function () {
+            $(".dropzone").html("Drag Here").removeClass("correct incorrect dropped");
+            $("#descriptions").html(`
+                    <div class="draggable-desc" data-role="agent">A licensed professional who represents buyers or sellers through the home buying or selling process.</div>
+                    <div class="draggable-desc" data-role="buyer">The individual seeking to purchase a home, responsible for securing financing and making an offer.</div>
+                    <div class="draggable-desc" data-role="seller">The current homeowner listing the property for sale and negotiating terms with prospective buyers.</div>
+                    <div class="draggable-desc" data-role="lawyer">A legal expert who ensures the contract comply with local laws, reviews documents and resolves disputes.</div>
+                `);
+            initDrag();
+            $("#checkButton").prop("disabled", true);
+        });
+
+        function initDrag() {
+            $(".draggable-desc").draggable({
+                revert: "invalid",
+                helper: "clone"
+            });
+        }
+    });
+</script>
+{% endblock %}
