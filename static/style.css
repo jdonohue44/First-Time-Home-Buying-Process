@@ -74,6 +74,10 @@ header#pagetitle {
     width: 50%;
 }
 
+.pcard-color{
+    background-color: #A4BE5C;
+}
+
 /* Card titles */
 .pcard-title {
     font-weight: bold;

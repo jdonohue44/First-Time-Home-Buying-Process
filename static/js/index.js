@@ -6,6 +6,7 @@ function selectCard(type) {
   const independentText = document.getElementById('independent-text');
   const partneredText = document.getElementById('partnered-text');
 
+  text.innerHTML = '';
   // Hide the unselected card
   if (type === 'independent') {
     partnered.style.display = 'none';
