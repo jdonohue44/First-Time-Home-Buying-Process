@@ -234,6 +234,10 @@ def quiz_result():
 def glossary_page():
     return render_template("cheatsheet.html", cheatsheet=cheatsheet)
 
+@app.route("/single-or-partnered")
+def single_or_partnered():
+    return render_template("single-or-partnered.html")
+
 @app.route("/timeline")
 def timeline():
     return render_template("timeline.html")

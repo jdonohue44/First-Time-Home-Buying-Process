@@ -22,7 +22,8 @@
 
         <nav class="pnavbar">
             <a href="{{ url_for('home')}}">Home</a>
-            <a href="{{ url_for('glossary_page') }}">Glossary</a>
+            <a href="{{ url_for('quiz_page', qid=0) }}">Take Quiz</a>
+            
         </nav>
 
         {% block content %}{% endblock %}
