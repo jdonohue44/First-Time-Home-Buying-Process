@@ -29,7 +29,8 @@ learning_steps = [
             "Credit Score: 620 minimum for conventional; 740+ gets best rates."
         ],
         "checklist": ["Proof of Income", "Bank Statements", "Credit Report"],
-        "hint": "Lenders want stable income, low debt, and savings."
+        "hint": "Lenders want stable income, low debt, and savings.",
+        "reinforcement_id": 0
     },
     {
         "id": 1,
@@ -40,7 +41,8 @@ learning_steps = [
             "Track what you liked/disliked."
         ],
         "checklist": ["Schedule Tours", "Take Notes", "Compare Options"],
-        "hint": "Act fast in hot markets—homes move quickly!"
+        "hint": "Act fast in hot markets—homes move quickly!",
+        "reinforcement_id": 1
     },
     {
         "id": 2,
@@ -50,7 +52,8 @@ learning_steps = [
             "They help find listings, schedule showings, and handle negotiations."
         ],
         "checklist": ["Define Search Criteria", "Share Pre-Approval Letter", "Start Touring Homes"],
-        "hint": "An agent can help you find hidden listings and make competitive offers."
+        "hint": "An agent can help you find hidden listings and make competitive offers.",
+        "reinforcement_id": 2
     },
     {
         "id": 3,
@@ -61,7 +64,8 @@ learning_steps = [
             "Use an escalation clause in hot markets if needed."
         ],
         "checklist": ["Include pre-approval letter", "Consider seller closing cost help", "Negotiate repairs or waive minor ones"],
-        "hint": "A strong offer improves your chances, especially in competitive markets."
+        "hint": "A strong offer improves your chances, especially in competitive markets.",
+        "reinforcement_id": 3
     },
     {
         "id": 4,
@@ -78,7 +82,7 @@ learning_steps = [
 
 # ========== QUIZ SECTION ==========
 
-quiz_data = [
+reinforcement_data =[
     {
         "id": 0,
         "question": "What is the recommended DTI (Debt-to-Income) ratio for most home loans?",
@@ -121,7 +125,82 @@ quiz_data = [
         ],
         "correctAnswer": "Both credit scores and debts aren't considered.",
         "hint": "Lenders consider both applicants' credit and financials in joint applications."
-    }
+    },
+]
+
+quiz_data = [
+    {
+        "id": 0,
+        "question": "What is the main benefit of getting pre-approved before house hunting?",
+        "options": [
+          "It lets you skip closing costs",
+          "It locks in a mortgage rate",
+          "It shows sellers you’re a serious buyer",
+          "It guarantees the lowest interest rate"
+        ],
+        "correctAnswer": "It shows sellers you’re a serious buyer",
+        "hint": "A pre-approval letter can strengthen your offer."
+      },
+      {
+        "id": 1,
+        "question": "Which professional helps you legally review contracts and resolve disputes during the homebuying process?",
+        "options": [
+          "Real estate agent",
+          "Loan officer",
+          "Lawyer",
+          "Seller"
+        ],
+        "correctAnswer": "Lawyer",
+        "hint": "You’ll need this person to sign off on your closing documents."
+      },
+      {
+        "id": 2,
+        "question": "What does a real estate agent do for a first-time homebuyer?",
+        "options": [
+          "Approves mortgage loans",
+          "Handles title transfers",
+          "Helps find and negotiate homes",
+          "Inspects the property"
+        ],
+        "correctAnswer": "Helps find and negotiate homes",
+        "hint": "They are your guide in touring and bidding on homes."
+      },
+      {
+        "id": 3,
+        "question": "Which of the following strategies can make your offer more attractive in a competitive market?",
+        "options": [
+          "Ask for many repairs",
+          "Offer below asking price",
+          "Include a personal note to the seller",
+          "Skip pre-approval"
+        ],
+        "correctAnswer": "Include a personal note to the seller",
+        "hint": "A thoughtful approach can sway emotional sellers."
+      },
+      {
+        "id": 4,
+        "question": "Which type of mortgage offers the lowest initial interest rate, but may adjust over time?",
+        "options": [
+          "30-Year Fixed",
+          "15-Year Fixed",
+          "5/1 ARM",
+          "10/1 ARM"
+        ],
+        "correctAnswer": "5/1 ARM",
+        "hint": "This option works well if you plan to move in a few years."
+      },
+      {
+        "id": 5,
+        "question": "At what stage do you typically sign closing documents and pay final costs?",
+        "options": [
+          "After touring homes",
+          "When making your offer",
+          "During final mortgage approval",
+          "When closing the sale"
+        ],
+        "correctAnswer": "When closing the sale",
+        "hint": "This is the last step before the home becomes officially yours."
+      }
 ]
 
 quiz_summary = {
@@ -249,6 +328,32 @@ def players():
 @app.route("/players-interactive")
 def players_interactive():
     return render_template("players-interactive.html")
+
+@app.route('/reinforcement/<int:step_id>', methods=["GET", "POST"])
+def reinforcement_question(step_id):
+    step = learning_steps[step_id]
+    if "reinforcement_id" in step:
+        question = reinforcement_data[step["reinforcement_id"]]
+        return render_template('reinforcement.html', question=question, step_id=step_id)
+    return redirect(url_for('learning_step', step_id=step_id + 1))
+
+@app.route('/reinforcement/<int:step_id>/answer', methods=["POST"])
+def reinforcement_answer(step_id):
+    step = learning_steps[step_id]
+    question = reinforcement_data[step["reinforcement_id"]]
+    user_answer = request.form.get("answer")
+    is_correct = (user_answer == question["correctAnswer"])
+
+    # Save answer if tracking
+    user_data.setdefault("reinforcement_answers", {})[str(step["reinforcement_id"])] = user_answer
+
+    return render_template(
+        "reinforcement_answer.html",
+        question=question,
+        user_answer=user_answer,
+        is_correct=is_correct,
+        step_id=step_id
+    )
 
 
 # ========== API ROUTES ==========

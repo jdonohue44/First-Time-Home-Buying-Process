@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Answer Review{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+
+            <div class="card p-4">
+                <h3 class="mb-3">Quick Check Result</h3>
+                <p><strong>Question:</strong> {{ question.question }}</p>
+                <p><strong>Your Answer:</strong> {{ user_answer }}</p>
+                <p>
+                    {% if is_correct %}
+                        ✅ <strong>Correct!</strong>
+                    {% else %}
+                        ❌ <strong>Incorrect.</strong><br>
+                        The correct answer is: <strong>{{ question.correctAnswer }}</strong>
+                    {% endif %}
+                </p>
+                <hr>
+                <p><em>Hint: {{ question.hint }}</em></p>
+
+                <div class="text-end mt-4">
+                    <a href="{{ url_for('learning_step', step_id=step_id + 1) }}" class="btn btn-primary">Continue Learning →</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
