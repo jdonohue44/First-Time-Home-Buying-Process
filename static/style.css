@@ -355,16 +355,16 @@ button:disabled {
 }
 
 .player-desc {
-    background-color: #666;
-    color: white;
-    padding: 8px;
-    font-size: 14px;
-    border-radius: 5px;
+    background-color: rgba(198, 32, 21, 0.17);
+    padding: 20px;
+    min-height: 200px;
+    font-size: 18px;
+    border-radius: 2px;
     margin-top: 8px;
 }
 
 .dropzone {
-    min-height: 120px;
+    min-height: 170px;
     background-color: #f8f9fa;
     border: 2px dashed #ccc;
     border-radius: 5px;
@@ -379,31 +379,33 @@ button:disabled {
     max-width: 250px;
 }
 .player-img {
-    height: 80px;
+    height: 200px;
     margin-bottom: 5px;
 }
 .draggable-desc {
     background-color: #666;
     color: white;
-    padding: 8px;
+    padding: 16px;
     border-radius: 5px;
     margin-bottom: 8px;
     cursor: move;
-    font-size: 14px;
-    min-height: 120px;
-    max-width: 240px;
+    font-size: 20px;
+    height: 170px;
+    min-width: 200px;
+    max-width: 300px;
+    align-content: center;
 }
 .correct {
-    border: 2px solid green;
+    border: 5px solid green;
 }
 .incorrect {
-    border: 2px solid red;
+    border: 5px solid red;
 }
 .dropzone.dropped {
     background-color: #ffffff;
     color: black;
 }
 .dropzone.active-hover {
-    background-color: #fff30f; 
-    border: 2px solid #92a728; 
+    background-color: #fffa97; 
+    border: 5px dashed #000000; 
 }

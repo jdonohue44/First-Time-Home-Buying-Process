@@ -21,10 +21,15 @@
             <a href="{{ url_for('home') }}" class="d-flex align-items-center">
                 <img src="{{ url_for('static', filename='img/house-side-red-no-bg.png') }}"
                      alt="Home"
-                     style="height: 75px; width: 75px; object-fit: contain;">
+                     style="height: 100px; width: 100px; object-fit: contain;">
                 <!-- <span>Home</span> -->
             </a>
-            <a href="{{ url_for('quiz_page', qid=0) }}">Test Yourself</a>
+            <a 
+            href="{{ url_for('quiz_page', qid=0) }}" 
+            class="btn btn-outline-danger btn-lg" 
+            style="font-family: 'Times New Roman', Times, serif; padding: 10px; background-color: #353331; color: white; border-radius: 5px; border: black 4px outset;">
+                Take the Test
+            </a>
         </nav>
 
         {% block content %}{% endblock %}

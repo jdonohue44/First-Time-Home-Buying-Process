@@ -34,7 +34,7 @@
                 {% if step.id > 0 %}
                     <a class="btn btn-secondary" href="{{ url_for('learning_step', step_id=step.id - 1) }}">← Previous</a>
                 {% else %}
-                <a class="btn btn-secondary" href="{{ url_for('home')}}">← Previous</a>
+                <a class="btn btn-secondary" href="{{ url_for('players_interactive')}}">← Previous</a>
                 {% endif %}
                 {% if step.id < max_id %}
                     {% if step.reinforcement_id is defined %}

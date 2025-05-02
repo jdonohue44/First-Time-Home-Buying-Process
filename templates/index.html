@@ -19,21 +19,21 @@
     <a href="{{ url_for('single_or_partnered') }}" 
        class="btn btn-lg mb-4" 
        role="button"
-       style="font-family: 'Times New Roman', Times, serif; background-color: #c62015; color: white; border-radius: 0; border: black 4px solid; width: 300px; font-size: 2em;">
+       style="font-family: 'Times New Roman', Times, serif; padding: 16px; background-color: #c62015; color: white; border-radius: 5px; border: #c62015 4px outset; width: 300px; font-size: 2em;">
        Learn the steps
     </a>
     
     <a href="{{ url_for('quiz_page', qid=0) }}" 
        class="btn btn-lg mt-4" 
        role="button"
-       style="font-family: 'Times New Roman', Times, serif; background-color: #353331; color: white; border-radius: 0; border: black 4px solid; width: 300px; font-size: 2em;">
+       style="font-family: 'Times New Roman', Times, serif; padding: 16px; background-color: #353331; color: white; border-radius: 5px; border: black 4px outset; width: 300px; font-size: 2em;">
        Test your readiness
     </a>
   </div>
 
   <!-- Image Column -->
   <div class="col-md-8 d-flex justify-content-center" style="padding-left: 0;">
-    <img src="{{ url_for('static', filename='img/house-side-red.png') }}" style="width: 90%;" alt="House For Sale">
+    <img src="{{ url_for('static', filename='img/house-side-red.png') }}" style="width: 80%;" alt="House For Sale">
   </div>
 </div>
 
