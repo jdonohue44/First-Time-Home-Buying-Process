@@ -6,32 +6,55 @@
 <div class="title">Quiz Question {{ qid + 1 }} / 6</div>
 
 <div class="content">
-    <form method="POST" action="/quiz/{{ qid }}">
+    <form method="POST" action="/quiz/{{ qid }}" id="quiz-form">
         <div class="qcard" style="width: 600px;">
             <div class="qcard-title">{{ question.question }}</div>
             <div class="qcard-desc">
-                {% for option in question.options %}
-                <div style="margin: 10px 0;">
-                    <input type="radio" name="answer" value="{{ option }}" id="{{ option }}"
-                        {% if user_data['quiz_answers'][qid|string] == option %}checked{% endif %} required />
-                    <label for="{{ option }}">{{ option }}</label>
+                <div class="options-boxes">
+                    {% for option in question.options %}
+                    <input type="radio" name="answer" value="{{ option }}" id="option-{{ loop.index }}"
+                           {% if user_data['quiz_answers'][qid|string] == option %}checked{% endif %} />
+                    <label class="option-box" for="option-{{ loop.index }}">{{ option }}</label>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
 
-            <div style="margin-top: 20px; display: flex; justify-content: space-between;">
-                {% if qid > 0 %}
-                <a href="{{ url_for('quiz_page', qid=qid - 1) }}"
-                   style="text-decoration: none; background-color: #d3d3d3; border: 1px solid black;
+                <!-- ⚠️ Warning message container -->
+                <div id="warning-message" style="color: #c62015; font-weight: bold; margin-top: 20px; display: none;">
+                    ⚠️ Please select an option before continuing.
+                </div>
+
+                <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                    {% if qid > 0 %}
+                    <a href="{{ url_for('quiz_page', qid=qid - 1) }}"
+                       style="text-decoration: none; background-color: lightgrey; border: 1px solid black;
                           color: black; padding: 8px 16px;">Back</a>
-                {% else %}
-                <div></div>
-                {% endif %}
+                    {% else %}
+                    <div></div>
+                    {% endif %}
 
-                <button type="submit" style="padding: 8px 16px;">Next</button>
+                    <button type="submit" style="padding: 8px 16px;">Next</button>
+                </div>
             </div>
-        </div>
     </form>
 </div>
-{% endblock %}
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("quiz-form");
+    const warning = document.getElementById("warning-message");
+
+    form.addEventListener("submit", function (e) {
+        const checked = document.querySelector("input[name='answer']:checked");
+
+        if (!checked) {
+            e.preventDefault(); // Prevent form submission
+            warning.style.display = "block"; // Show warning message
+            console.log("Please select an answer."); // Log message for debugging
+        } else {
+            warning.style.display = "none"; // Hide warning message if an answer is selected
+        }
+    });
+});
+</script>
+
+{% endblock %}

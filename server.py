@@ -391,6 +391,10 @@ def get_quiz_summary():
 def get_mortgage_options():
     return jsonify(mortgage_options)
 
+@app.route('/test-yourself')
+def test_yourself():
+    return render_template('test_yourself.html')
+
 
 # ========== LAUNCH ==========
 

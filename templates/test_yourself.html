@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Test Your Homebuying Skills{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="mb-4">🧠 Time to Test Your Homebuying Skills!</h1>
+    <p class="lead">Answer each question to the best of your ability and check your results at the end.</p>
+    <p class="mb-4">You can go back and review everything before taking the quiz.</p>
+
+    <div class="d-flex justify-content-center gap-4 mt-4">
+        <a href="{{ url_for('timeline') }}" class="btn btn-secondary btn-lg">🔙 Go Back</a>
+        <a href="{{ url_for('quiz_page', qid=0) }}" class="btn btn-lg" style="background-color: #c62015; color: white;">
+    📝 Take Quiz!
+</a>
+    </div>
+</div>
+{% endblock %}

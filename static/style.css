@@ -409,3 +409,40 @@ button:disabled {
     background-color: #fffa97; 
     border: 5px dashed #000000; 
 }
+
+.options-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.option-box {
+    display: block;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 16px;
+    background-color: #fff;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+input[type="radio"]:checked + .option-box {
+    background-color: #ffe5e3;
+    border-color: #c62015;
+    box-shadow: 0 0 0 3px #c62015;
+}
+
+input[type="radio"]:focus + .option-box {
+/*    outline: 2px dashed #999;*/
+    outline-offset: 2px;
+}
+
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
