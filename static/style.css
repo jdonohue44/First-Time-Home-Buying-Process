@@ -359,6 +359,7 @@ button:disabled {
     padding: 20px;
     min-height: 200px;
     min-width: 200px;
+    margin-top: 5px;
     align-content: center;
     border: black 1px solid;
 }
@@ -401,7 +402,7 @@ button:disabled {
     color: black;
 }
 .dropzone.active-hover {
-    background-color: #fffa97; 
+    background-color: #d3d3d3; 
     border: 3px dashed #000000; 
 }
 

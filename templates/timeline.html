@@ -1,18 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="title">Complete the Home Buying Timeline</div>
 
-<div class="container mt-5">
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <hr>
+  </div>
+  <div class="col-3"></div>
+</div>
+
+<div class="container mt-2">
   <div class="row justify-content-center">
 
-    <h2 class="mb-4 mt-4" style="font-family: 'Times New Roman', serif;">Complete the Home Buying Timeline</h2>
-
     <!-- Step Bank -->
-    <div id="steps" class="d-flex flex-wrap mb-4"></div>
+    <div id="steps" class="d-flex flex-wrap mb-2"></div>
 
     <!-- Timeline -->
     <!-- <h5>Timeline:</h5> -->
-    <div class="timeline-arrow-container mb-4">
+    <div class="timeline-arrow-container mb-2">
       <div class="arrow-shaft" style="font-family: 'Times New Roman', serif;">
         <div class="timeline-slot" data-slot="1">Drop Step</div>
         <div class="timeline-slot" data-slot="2">Drop Step</div>
@@ -25,30 +32,40 @@
     </div>
 
     <!-- Buttons -->
-    <div class="btn-row d-flex gap-3 mb-4">
-      <div class="btn-row d-flex justify-content-center gap-3">
-        <button id="resetBtn" class="btn btn-secondary btn-lg">🔄 Reset</button>
-        <button 
-          id="checkOrderBtn" 
-          class="btn btn-success btn-lg" 
-          disabled 
-          style="font-family: 'Times New Roman', serif;" 
-          data-bs-toggle="tooltip" 
-          data-bs-placement="top" 
-          title="Drag all steps into the timeline before checking">
-          ✅ Check Order
-      </button>
-      <button 
-        id="takeQuizBtn" 
-        class="btn btn-outline-danger btn-lg" 
-        style="font-family: 'Times New Roman', serif;" 
-        disabled
-        data-quiz-url="{{ url_for('quiz_page', qid=0) }}">
-        📝 Take Quiz
-      </button>
-      </div>      
+    <div class="container mb-3">
+      <div class="row align-items-center">
+
+        <!-- Left: Back Button -->
+        <div class="col text-start">
+          <a href="{{ url_for('learning_step', step_id=4) }}">
+            <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Previous" style="height: 60px;">
+          </a>
+        </div>
+
+        <!-- Center: Reset and Check Buttons -->
+        <div class="col text-center">
+          <button id="resetBtn" class="btn btn-secondary btn-lg">🔄 Reset</button>
+          <button id="checkOrderBtn" class="btn btn-success btn-lg" disabled
+            style="font-family: 'Times New Roman', serif;" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Drag all steps into the timeline before checking">
+            ✅ Check Order
+          </button>
+        </div>
+
+        <!-- Right: Take the Test Button -->
+        <div class="col text-end">
+          <button id="takeQuizBtn" class="btn btn-outline-danger btn-lg" style="font-family: 'Times New Roman', serif;"
+            disabled data-quiz-url="{{ url_for('quiz_page', qid=0) }}">
+            Take the Test
+          </button>
+        </div>
+
+      </div>
     </div>
+
+
     <div id="resultMessage" class="mt-3 fw-bold"></div>
+
   </div>
 </div>
 
@@ -57,9 +74,9 @@
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/timeline.js') }}"></script>
 <script>
-  $(function() {
-    $("#takeQuizBtn").click(function() {
-      window.location.href = "{{ url_for('quiz_page', qid=0) }}"; 
+  $(function () {
+    $("#takeQuizBtn").click(function () {
+      window.location.href = "{{ url_for('quiz_page', qid=0) }}";
     });
   });
 </script>
