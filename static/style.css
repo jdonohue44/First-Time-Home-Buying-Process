@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: 'Times New Roman', serif;
-    background-color: white;
+    background-color: rgba(240, 240, 240, 0.9) !important;
 }
 
 header#pagetitle {
