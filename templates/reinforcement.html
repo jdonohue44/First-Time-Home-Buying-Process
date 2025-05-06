@@ -3,35 +3,55 @@
 {% block title %}Quick Check: Step {{ step_id + 1 }}{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <h2 class="text-center mb-4" style="font-family: 'Times New Roman', serif;">
-                Quick Check Before You Continue
-            </h2>
+<div class="title">Quick Check – Step {{ step_id + 1 }}</div>
 
-            <div class="card p-4" style="background-color: #f8f9fa;">
-                <form method="post" action="{{ url_for('reinforcement_answer', step_id=step_id) }}">
-                    <p class="mb-3" style="font-size: 1.2rem;"><strong>{{ question.question }}</strong></p>
-
+<div class="content">
+    <form method="POST" action="{{ url_for('reinforcement_answer', step_id=step_id) }}" id="quick-check-form">
+        <div class="qcard" style="width: 600px;">
+            <div class="qcard-title">{{ question.question }}</div>
+            <div class="qcard-desc">
+                <div class="options-boxes">
                     {% for option in question.options %}
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="answer" id="option{{ loop.index }}" value="{{ option }}" required>
-                            <label class="form-check-label" for="option{{ loop.index }}">
-                                {{ option }}
-                            </label>
-                        </div>
+                    <input type="radio" name="answer" value="{{ option }}" id="option-{{ loop.index }}" hidden />
+                    <label class="option-box" for="option-{{ loop.index }}">{{ option }}</label>
                     {% endfor %}
+                </div>
 
-                    <p class="text-muted mt-3"><em>💡 Hint: {{ question.hint }}</em></p>
+                <!-- Optional hint -->
+                <p class="text-muted" style="margin-top: 16px;"><em>💡 Hint: {{ question.hint }}</em></p>
 
-                    <div class="d-flex justify-content-between mt-4">
-                        <a class="btn btn-secondary" href="{{ url_for('learning_step', step_id=step_id) }}">← Back to Step</a>
-                        <button type="submit" class="btn btn-success">Continue →</button>
-                    </div>
-                </form>
+                <!-- Optional warning message -->
+                <div id="warning-message" style="color: #c62015; font-weight: bold; margin-top: 20px; display: none;">
+                    ⚠️ Please select an option before continuing.
+                </div>
+
+                <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                    <a href="{{ url_for('learning_step', step_id=step_id) }}"
+                       style="text-decoration: none; background-color: lightgrey; border: 1px solid black;
+                              color: black; padding: 8px 16px;">← Back to Step</a>
+
+                    <button type="submit" style="padding: 8px 16px;">Continue →</button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("quick-check-form");
+    const warning = document.getElementById("warning-message");
+
+    form.addEventListener("submit", function (e) {
+        const checked = document.querySelector("input[name='answer']:checked");
+
+        if (!checked) {
+            e.preventDefault();
+            warning.style.display = "block";
+        } else {
+            warning.style.display = "none";
+        }
+    });
+});
+</script>
 {% endblock %}
