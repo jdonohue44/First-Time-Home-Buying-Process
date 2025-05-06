@@ -74,7 +74,7 @@
       <button id="resetButton" class="btn btn-lg btn-warning">Reset</button>
       <button id="checkButton" class="btn btn-lg btn-success" disabled>Check Answers</button>
     </div>       
-    <a href="{{ url_for('start_learning') }}">
+    <a href="{{ url_for('progress_timeline', id=1) }}">
       <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
     </a>
   </div>

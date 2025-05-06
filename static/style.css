@@ -257,6 +257,26 @@ header#pagetitle {
     border-radius: 4px;
 }
 
+.prg-timeline-slot {
+    width: 150px;
+    height: 100px;
+    background-color: #e2e2e2;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    border: 1px solid rgb(80, 80, 80);
+    border-radius: 4px;
+}
+
+.active-step {
+    background-color: #fe2424;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    border: 2px solid black;
+  }
 
 .timeline-background {
     background: url('/static/img/arrow-line.svg') center center repeat-x;

@@ -355,6 +355,9 @@ def reinforcement_answer(step_id):
         step_id=step_id
     )
 
+@app.route('/progress-timeline/<int:id>')
+def progress_timeline(id):
+    return render_template("progress-timeline.html", id=id)
 
 # ========== API ROUTES ==========
 @app.route('/start-learning')
