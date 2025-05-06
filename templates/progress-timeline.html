@@ -71,7 +71,11 @@
       <a href="{{ url_for('players_interactive') }}">
         <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
       </a>
-    {% else %}
+    {% elif id == 2 %}
+      <a href="{{ url_for('progress_timeline', id=1) }}">
+        <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
+      </a>
+    {% elif id == 3 %}
       <a href="{{ url_for('progress_timeline', id=2) }}">
         <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
       </a>
