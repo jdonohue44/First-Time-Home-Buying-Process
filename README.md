@@ -1,11 +1,11 @@
 # First-time Home-Buying Process Web Application
 
-https://homebuying101.onrender.com/
+Live prototype! https://homebuying101.onrender.com/
 
-## What does this project do?
+## What is this project?
 This is a Python Flask web application to teach users how to buy a home, and to test their readiness with a quiz.
 
-## Usage
-1. Install required Python dependencies `pip install dependencies.txt`
-2. Run `python server.py` to run the Flask server
-3. Head to localhost to use the web application
+## How do I run this project?
+1. `pip install requirements.txt`
+2. `python server.py`
+3. http://localhost:8000/
