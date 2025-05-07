@@ -1,0 +1,97 @@
+<!-- Slide 8 -->
+<!-- Daniel Chung, dc3561 -->
+{% extends "base.html" %}
+
+{% block title %}Get Pre-Approved by Your Bank{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+  <!-- Title Section with Icon -->
+  <div class="text-center mb-2">
+    <div class="d-flex justify-content-center align-items-center gap-3">
+      <img src="{{ url_for('static', filename='img/bank.png') }}"
+           alt="Bank Icon"
+           style="height: 48px; width: auto;">
+      <h2 class="mb-0 bank-title">Get Pre-Approved by Your Bank</h2>
+    </div>
+
+    <!-- Double underline -->
+    <div style="height: 1px; background-color: black; width: 60%; margin: 0.3rem auto;"></div>
+    <div style="height: 1px; background-color: black; width: 60%; margin: 0 auto 1rem;"></div>
+
+    <p class="lead" style="margin-top: 1rem;">Your bank will review your finances to give you a price range.</p>
+
+</div>
+
+<!-- Main row with checklist + image side-by-side -->
+<div class="row mt-4 align-items-start">
+
+    <!-- LEFT COLUMN: Checklist -->
+    <div class="col-md-6 d-flex justify-content-end">
+
+      <div class="checklist-container">
+
+        <div class="checklist-inner">
+
+          <div class="check-item">
+            <input type="checkbox" id="proof-income">
+            <label for="proof-income" style="display: block;">
+              <strong>Proof of Income</strong><br>
+              DTI Ratio: under 43% preferred.
+            </label>
+          </div>
+
+          <div class="check-item">
+            <input type="checkbox" id="bank-statements">
+            <label for="bank-statements" style="display: block;">
+              <strong>Bank Statements</strong><br>
+              Income Stability: Consistent 2+ year history is preferred.<br>
+              Assets: Your down payment and reserves (+2 months of mortgage payments saved).
+            </label>
+          </div>
+
+          <div class="check-item">
+            <input type="checkbox" id="credit-report">
+            <label for="credit-report" style="display: block;">
+              <strong>Credit Report</strong><br>
+              Credit Score: 620 minimum; 740+ gets best rates.
+            </label>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: Image -->
+    <div class="col-md-6 d-flex justify-content-start flex-column align-items-center">
+
+      <div class="image-box">
+        <img src="{{ url_for('static', filename='img/preapprovedletter.jpg') }}"
+             alt="Preapproval Letter"
+             class="img-fluid"
+             style="max-height: 350px;">
+      </div>
+
+      <p class="mt-2">Get your preapproval letter</p>
+      
+    </div>
+
+  <!-- ARROWS ALIGNED BELOW FULL ROW -->
+  <div class="arrow-nav">
+
+    <a href="{{ url_for('progress_timeline', id=1) }}">
+      <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
+    </a>
+    <a href="{{ url_for('progress_timeline', id=2) }}">
+      <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
+    </a>
+
+  </div>
+
+</div>
+
+{% endblock %}

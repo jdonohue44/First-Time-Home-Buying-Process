@@ -1,0 +1,113 @@
+<!-- Slide 15 (22) -->
+<!-- Daniel Chung, dc3561 -->
+{% extends "base.html" %}
+
+{% block title %}Compare Mortgage vs Rent{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+  <!-- Title Section with Icon -->
+  <div class="text-center mb-2">
+    <div class="d-flex justify-content-center align-items-center gap-3">
+      <h2 class="mb-0 bank-title">Compare Mortgage vs Rent</h2>
+    </div>
+
+    <!-- Double underline -->
+    <div style="height: 1px; background-color: black; width: 60%; margin: 0.3rem auto;"></div>
+    <div style="height: 1px; background-color: black; width: 60%; margin: 0 auto 1rem;"></div>
+
+</div>
+
+<div class="row">
+    <!-- LEFT COLUMN: Inputs + Table -->
+    <div class="col-md-6">
+
+      <!-- Input Form -->
+      <form id="mortgageForm" class="mb-4">
+        
+        <div class="form-group">
+          <label for="downPayment"><strong>Down Payment ($)</strong></label>
+          <input type="number" class="form-control" id="downPayment" value="20000">
+        </div>
+
+        <div class="form-group">
+          <label for="propertyValue"><strong>Property Value ($)</strong></label>
+          <input type="number" class="form-control" id="propertyValue" value="100000">
+        </div>
+
+        <div class="form-group">
+          <label for="rentAmount"><strong>Rent Amount ($/mo)</strong></label>
+          <input type="number" class="form-control" id="rentAmount" value="2000">
+        </div>
+
+        <button type="submit" class="btn btn-dark mt-2">Submit</button>
+
+      </form>
+
+      <!-- Table -->
+      <table class="table table-bordered custom-table">
+
+        <thead class="thead-light">
+          <tr>
+            <th>Number</th>
+            <th>Type</th>
+            <th>Note</th>
+            <th>Rate</th>
+            <th>Monthly</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Rent</td>
+            <td>Non-recoverable cost</td>
+            <td>3-5% annually</td>
+            <td id="monthlyRent">---</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>15-Year Fixed</td>
+            <td>Lower rates, higher monthly payment</td>
+            <td>6.25%</td>
+            <td id="monthly15">---</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>30-Year Fixed</td>
+            <td>Higher rates, lower monthly payment</td>
+            <td>6.75%</td>
+            <td id="monthly30">---</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- RIGHT COLUMN: Chart -->
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <canvas id="paymentChart" width="400" height="300"></canvas>
+    </div>
+
+</div>
+ 
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Custom JS file -->
+<script src="{{ url_for('static', filename='js/mortgage-calc.js') }}"></script>
+
+<!-- ARROWS ALIGNED BELOW FULL ROW -->
+<div class="arrow-nav">
+
+    <a href="{{ url_for('finalize_mort') }}">
+        <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
+    </a>
+    <a href="{{ url_for('learning_step', step_id=0) }}">
+        <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
+    </a>
+
+</div>
+
+{% endblock %}

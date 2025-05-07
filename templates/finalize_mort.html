@@ -1,0 +1,97 @@
+<!-- Slide 14 -->
+<!-- Daniel Chung, dc3561 -->
+{% extends "base.html" %}
+
+{% block title %}Finalize Your Mortgage & Close the Sale{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+  <!-- Title Section with Icon -->
+  <div class="text-center mb-2">
+    <div class="d-flex justify-content-center align-items-center gap-3">
+      <img src="{{ url_for('static', filename='img/key.png') }}"
+           alt="Key Icon"
+           style="height: 48px; width: auto;">
+      <h2 class="mb-0 bank-title">Finalize Your Mortgage & Close the Sale</h2>
+    </div>
+
+    <!-- Double underline -->
+    <div style="height: 1px; background-color: black; width: 60%; margin: 0.3rem auto;"></div>
+    <div style="height: 1px; background-color: black; width: 60%; margin: 0 auto 1rem;"></div>
+
+    <p class="lead" style="margin-top: 1rem;">Lock in the home you love with a strong, strategic offer.</p>
+
+</div>
+
+<!-- Main row with checklist + image side-by-side -->
+<div class="row mt-4 d-flex align-items-stretch">
+
+    <!-- LEFT COLUMN: Checklist -->
+    <div class="col-md-6 d-flex justify-content-center">
+
+      <div class="checklist-container w-65">
+
+            <div class="checklist-inner d-flex flex-column justify-content-between h-100">
+
+                <div class="check-item">
+                    <input type="checkbox" id="step-1">
+                    <label for="step-1"><strong>Final Mortgage Approval</strong></label>
+                </div>
+                
+                <div class="check-item">
+                    <input type="checkbox" id="step-2">
+                    <label for="step-2"><strong>Get Lawyer</strong></label>
+                </div>
+                
+                <div class="check-item">
+                    <input type="checkbox" id="step-3">
+                    <label for="step-3"><strong>Sign Closing Docs</strong></label>
+                </div>
+                
+                <div class="check-item">
+                    <input type="checkbox" id="step-4">
+                    <label for="step-4"><strong>Pay Closing Costs</strong></label>
+                </div>
+            
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: Two Images Side by Side -->
+    <div class="col-md-6 d-flex justify-content-start align-items-center">
+        <div class="d-flex justify-content-center align-items-start gap-2">
+            
+            <!-- Mortgage Agreement Image -->
+            <img src="{{ url_for('static', filename='img/mortagr.jpg') }}"
+                alt="Mortgage Agreement"
+                class="img-fluid bordered-img"
+                style="max-height: 400px; width: auto;">
+
+            <!-- Power of Attorney Image -->
+            <img src="{{ url_for('static', filename='img/power.jpg') }}"
+                alt="Real Estate Power of Attorney"
+                class="img-fluid bordered-img"
+                style="max-height: 400px; width: auto;">
+
+        </div>
+    </div>
+
+</div>
+
+<!-- ARROWS ALIGNED BELOW FULL ROW -->
+<div class="arrow-nav">
+
+    <a href="{{ url_for('progress_timeline', id=3) }}">
+        <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
+    </a>
+    <a href="{{ url_for('compare') }}">
+        <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
+    </a>
+
+</div>
+
+{% endblock %}

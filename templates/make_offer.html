@@ -1,0 +1,71 @@
+<!-- Slide 11 -->
+<!-- Daniel Chung, dc3561 -->
+{% extends "base.html" %}
+
+{% block title %}Found the One? Time to Make an Offer!{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+  <!-- Title Section with Icon -->
+  <div class="text-center mb-2">
+    <div class="d-flex justify-content-center align-items-center gap-3">
+      <img src="{{ url_for('static', filename='img/offer.png') }}"
+           alt="Offer Icon"
+           style="height: 48px; width: auto;">
+      <h2 class="mb-0 bank-title">Found the One? Time to Make an Offer!</h2>
+    </div>
+
+    <!-- Double underline -->
+    <div style="height: 1px; background-color: black; width: 60%; margin: 0.3rem auto;"></div>
+    <div style="height: 1px; background-color: black; width: 60%; margin: 0 auto 1rem;"></div>
+
+    <p class="lead" style="margin-top: 1rem;">Lock in the home you love with a strong, strategic offer.</p>
+
+</div>
+
+<!-- Checklist & Image Row -->
+<div class="row mt-4 d-flex align-items-stretch">
+
+    <!-- LEFT COLUMN: Bullet Point Box -->
+    <div class="col-md-6 d-flex justify-content-center">
+        <div class="checklist-container h-100" style="min-height: 300px;">
+        <div class="checklist-inner h-100 d-flex flex-column justify-content-center">
+            <ul class="offer-list flex-fill d-flex flex-column justify-content-evenly m-0 p-0" style="list-style-position: inside;">
+            <li>Act fast if the market’s hot.</li>
+            <li>Offer a bit more or use an auto-raise clause.</li>
+            <li>Add a short personal note to the seller.</li>
+            <li>Skip small repair asks if you’re okay with it.</li>
+            <li>Include pre-approval and proof of funds.</li>
+            </ul>
+        </div>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Negotiation Button Placeholder -->
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+    <!-- ***FUTURE LINK SLIDE 13*** -->
+    <a href="#" style="text-decoration: none; cursor: pointer;">
+      <img src="{{ url_for('static', filename='img/negotiationbutton.png') }}"
+           alt="Negotiation Simulator"
+           class="img-fluid"
+           style="height: 220px; width: auto;">
+    </a>
+    </div>
+
+</div>
+
+<!-- ARROWS ALIGNED BELOW FULL ROW -->
+<div class="arrow-nav">
+
+    <a href="{{ url_for('find_agent') }}">
+        <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
+    </a>
+    <a href="{{ url_for('progress_timeline', id=3) }}">
+        <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
+    </a>
+
+</div>
+
+{% endblock %}
