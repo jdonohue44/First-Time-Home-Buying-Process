@@ -533,3 +533,28 @@ input[type="radio"] {
     vertical-align: middle;
     color: white;
 }
+
+.redfin-btn {
+    align-items: center;
+    background-color: #a02020;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-left: 1rem;
+    display: inline-block;
+    font-family: 'Times New Roman', serif;
+  }
+  
+  .redfin-btn:hover {
+    background-color: #801919;
+    color: #fff;
+  }
+  
+  .redfin-logo {
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
