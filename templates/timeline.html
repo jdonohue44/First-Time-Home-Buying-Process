@@ -32,7 +32,7 @@
     </div>
 
     <!-- Buttons -->
-    <div class="container mb-3">
+    <div class="container mt-3 mb-3" style="padding: 0% 5%;">
       <div class="row align-items-center">
 
         <!-- Left: Back Button -->
@@ -52,12 +52,11 @@
           </button>
         </div>
 
-        <!-- Right: Take the Test Button -->
+        <!-- Right: Next Button -->
         <div class="col text-end">
-          <button id="takeQuizBtn" class="btn btn-outline-danger btn-lg" style="font-family: 'Times New Roman', serif;"
-            disabled data-quiz-url="{{ url_for('test_yourself') }}">
-            Take the Test
-          </button>
+          <a href="{{ url_for('test_yourself') }}">
+            <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
+          </a>
         </div>
 
       </div>

@@ -61,7 +61,7 @@ header#pagetitle {
 
 /* Hover effect */
 .pcard:hover {
-    background-color: #A4BE5C;
+    background-color: rgba(198, 32, 21, 0.17);
     cursor: pointer;
 }
 
@@ -75,7 +75,7 @@ header#pagetitle {
 }
 
 .pcard-color{
-    background-color: #A4BE5C;
+    background-color: rgba(198, 32, 21, 0.17);
 }
 
 /* Card titles */
