@@ -410,6 +410,7 @@ button:disabled {
     min-height: 170px;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
 }
 .correct {
     border: 5px solid green;

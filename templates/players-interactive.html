@@ -11,10 +11,10 @@
   <div class="col-3"></div>
 </div>
 
-<div class="container-fluid mt-2" style="padding: 0 4em;">
+<div class="container-fluid mt-2" style="padding: 0% 5%;">
   <div class="row g-0">
     <!-- LEFT SIDE -->
-    <div class="col-12 col-md-8 d-flex justify-content-center">
+    <div class="col-12 col-md-6 d-flex">
       <div class="row g-3">
         <div class="col-6 d-flex justify-content-center">
           <div class="player-card">
@@ -28,13 +28,13 @@
             <div class="dropzone" data-correct="seller">Drag Here</div>
           </div>
         </div>
-        <div class="col-6 d-flex justify-content-center mt-4">
+        <div class="col-6 d-flex justify-content-center mt-1">
           <div class="player-card">
             <img src="{{ url_for('static', filename='img/buyer.png') }}" class="player-img">
             <div class="dropzone" data-correct="buyer">Drag Here</div>
           </div>
         </div>
-        <div class="col-6 d-flex justify-content-center mt-4">
+        <div class="col-6 d-flex justify-content-center mt-1">
           <div class="player-card">
             <img src="{{ url_for('static', filename='img/lawyer.png') }}" class="player-img">
             <div class="dropzone" data-correct="lawyer">Drag Here</div>
@@ -44,7 +44,7 @@
     </div>
 
     <!-- RIGHT SIDE: Descriptions -->
-    <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
+    <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
       <div id="descriptions" class="row g-2" style="max-width: 500px;">
         <div class="col-6 d-flex flex-column gap-2">
           <div class="draggable-desc" data-role="seller">
@@ -66,13 +66,13 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-between mt-5 mb-5 align-items-center">
+  <div class="d-flex justify-content-between mt-4 mb-5 align-items-center" style="padding: 0% 2.5%">
     <a href="{{ url_for('players') }}">
       <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Previous" style="height: 60px;">
     </a>
     <div class="d-flex gap-2">
-      <button id="resetButton" class="btn btn-lg btn-warning">Reset</button>
-      <button id="checkButton" class="btn btn-lg btn-success" disabled>Check Answers</button>
+      <button id="resetButton" class="btn btn-lg btn-secondary">🔄 Reset</button>
+      <button id="checkButton" class="btn btn-lg btn-success" disabled>✅ Check Answers</button>
     </div>       
     <a href="{{ url_for('progress_timeline', id=1) }}">
       <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
@@ -88,7 +88,12 @@
   $(function () {
     $(".draggable-desc").draggable({
       revert: "invalid",
-      helper: "clone"
+      helper: function () {
+        const $original = $(this);
+        const $clone = $original.clone();
+        $clone.width($original.width());
+        return $clone;
+      }
     });
 
     $(".dropzone").droppable({
