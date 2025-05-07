@@ -410,7 +410,6 @@ button:disabled {
     min-height: 170px;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
 }
 .correct {
     border: 5px solid green;
@@ -462,4 +461,75 @@ input[type="radio"]:focus + .option-box {
 input[type="radio"] {
     position: absolute;
     opacity: 0;
+}
+
+/* Checklist wrapper */
+.checklist-container {
+    background-color: #f2f2f2;
+    border: 2px solid black;
+    padding: 15px;
+    width: fit-content;
+}
+  
+/* Inner checklist box */
+.checklist-inner {
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+}
+  
+/* Checklist checkbox spacing */
+.check-item {
+    display: flex;
+    align-items: start;
+    margin-bottom: 1rem;
+}
+  
+/* Enlarged checkbox */
+.check-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+  
+/* Image border container */
+.image-box {
+    border: 1px solid #aaa;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+}
+  
+/* Arrow navigation container */
+.arrow-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding: 0 3rem;
+}
+  
+/* Bank title formatting */
+.bank-title {
+    font-family: 'Times New Roman', serif;
+    font-size: 3rem;
+}
+
+.offer-list li {
+    font-size: 1.1rem;
+    padding-left: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.bordered-img {
+    border: 1px solid #333;
+    max-width: 45%;
+}
+
+.custom-table thead th {
+    background-color: #666;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
 }
