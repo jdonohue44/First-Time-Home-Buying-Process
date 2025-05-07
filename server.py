@@ -179,15 +179,14 @@ quiz_data = [
       },
       {
         "id": 4,
-        "question": "Which type of mortgage offers the lowest initial interest rate, but may adjust over time?",
+        "question": "Which type of mortgage offers the lowest interest rate but results in higher monthly payments?",
         "options": [
           "30-Year Fixed",
           "15-Year Fixed",
-          "5/1 ARM",
-          "10/1 ARM"
+          "Rent",
         ],
-        "correctAnswer": "5/1 ARM",
-        "hint": "This option works well if you plan to move in a few years."
+        "correctAnswer": "15-Year Fixed",
+        "hint": "The rate is about 6.25% annually."
       },
       {
         "id": 5,
