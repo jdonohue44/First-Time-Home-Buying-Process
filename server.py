@@ -1,5 +1,5 @@
 # Daniel Chung, dc3561
-# Othmane El Houss, oe2196
+# Othmane El Houssi, oe2196
 
 from flask import Flask
 from flask import render_template
@@ -358,6 +358,26 @@ def reinforcement_answer(step_id):
 @app.route('/progress-timeline/<int:id>')
 def progress_timeline(id):
     return render_template("progress-timeline.html", id=id)
+
+@app.route('/preapproval')
+def preapproval_step():
+    return render_template("step-preapproval.html")
+
+@app.route('/find-agent')
+def find_agent():
+    return render_template("find_agent.html")
+
+@app.route('/make-offer')
+def make_offer():
+    return render_template("make_offer.html")
+
+@app.route('/progress-timeline/4')
+def finalize_mort():
+    return render_template("finalize_mort.html")
+
+@app.route('/compare')
+def compare():
+    return render_template('compare.html')
 
 # ========== API ROUTES ==========
 @app.route('/start-learning')
