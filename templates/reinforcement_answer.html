@@ -13,17 +13,29 @@
                 <p><strong>Your Answer:</strong> {{ user_answer }}</p>
                 <p>
                     {% if is_correct %}
-                        ✅ <strong>Correct!</strong>
+                    ✅ <strong>Correct!</strong>
                     {% else %}
-                        ❌ <strong>Incorrect.</strong><br>
-                        The correct answer is: <strong>{{ question.correctAnswer }}</strong>
+                    ❌ <strong>Incorrect.</strong><br>
+                    The correct answer is: <strong>{{ question.correctAnswer }}</strong>
                     {% endif %}
                 </p>
                 <hr>
                 <p><em>Hint: {{ question.hint }}</em></p>
 
                 <div class="text-end mt-4">
-                    <a href="{{ url_for('learning_step', step_id=step_id + 1) }}" class="btn btn-primary">Continue Learning →</a>
+                    {% if 'progress_timeline' in question.next_page %}
+                    <!-- If the next page is a timeline page, include the id dynamically -->
+                    <a href="{{ url_for(question.next_page, id=question.timeline_id) }}">
+                        <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next"
+                             style="height: 60px;">
+                    </a>
+                    {% else %}
+                    <!-- If the next page is not related to the timeline, just redirect to the next page -->
+                    <a href="{{ url_for(question.next_page) }}">
+                        <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next"
+                             style="height: 60px;">
+                    </a>
+                    {% endif %}
                 </div>
             </div>
 

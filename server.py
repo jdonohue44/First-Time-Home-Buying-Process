@@ -13,7 +13,7 @@ CORS(app, origins=["http://127.0.0.1:5000", "http://localhost:5000"])
 # ========== IN-MEMORY USER DATA ==========
 user_data = {
     "quiz_answers": {},
-    "entry_times": {} 
+    "entry_times": {}
 }
 
 # ========== LEARNING SECTION ==========
@@ -63,9 +63,10 @@ learning_steps = [
             "Add a short personal note to the seller for a stronger appeal.",
             "Use an escalation clause in hot markets if needed."
         ],
-        "checklist": ["Include pre-approval letter", "Consider seller closing cost help", "Negotiate repairs or waive minor ones"],
+        "checklist": ["Include pre-approval letter", "Consider seller closing cost help",
+                      "Negotiate repairs or waive minor ones"],
         "hint": "A strong offer improves your chances, especially in competitive markets.",
-        "reinforcement_id": 3
+        "reinforcement_id": 4
     },
     {
         "id": 4,
@@ -82,13 +83,16 @@ learning_steps = [
 
 # ========== QUIZ SECTION ==========
 
-reinforcement_data =[
+reinforcement_data = [
     {
         "id": 0,
         "question": "What is the recommended DTI (Debt-to-Income) ratio for most home loans?",
         "options": ["Exactly 40%", "Under 43%", "Over 50%", "It doesn’t matter"],
         "correctAnswer": "Under 43%",
-        "hint": "Lenders generally want to minimize risk—lower DTI is better."
+        "hint": "Lenders generally want to minimize risk—lower DTI is better.",
+        "back_page": "preapproval_step",
+        "next_page": "progress_timeline",
+        "timeline_id": 2
     },
     {
         "id": 1,
@@ -100,7 +104,8 @@ reinforcement_data =[
             "To track your shopping habits"
         ],
         "correctAnswer": "To show income stability",
-        "hint": "Lenders prefer consistent earnings to ensure you can repay the loan."
+        "hint": "Lenders prefer consistent earnings to ensure you can repay the loan.",
+        "redirect_to": "preapproval_step"
     },
     {
         "id": 2,
@@ -112,7 +117,8 @@ reinforcement_data =[
             "Income tax returns"
         ],
         "correctAnswer": "2–6 months of mortgage payments saved",
-        "hint": "Reserves give lenders confidence you can handle payments after closing."
+        "hint": "Reserves give lenders confidence you can handle payments after closing.",
+        "redirect_to": "preapproval_step"
     },
     {
         "id": 3,
@@ -124,8 +130,23 @@ reinforcement_data =[
             "Both credit scores and debts aren't considered."
         ],
         "correctAnswer": "Both credit scores and debts aren't considered.",
-        "hint": "Lenders consider both applicants' credit and financials in joint applications."
+        "hint": "Lenders consider both applicants' credit and financials in joint applications.",
+        "redirect_to": "preapproval_step"
     },
+    {
+        "id": 4,
+        "question": "Which of these statements is NOT part of finding an agent and starting looking?",
+        "options": [
+            "Share pre-approval letter.",
+            "Define search criteria.",
+            "Check your credit report.",
+            "Tour some homes."
+        ],
+        "correctAnswer": "Check your credit report.",
+        "hint": "This phase is about starting the actual search and working with professionals.",
+        "back_page": "find_agent",
+        "next_page": "make_offer",
+    }
 ]
 
 quiz_data = [
@@ -133,73 +154,73 @@ quiz_data = [
         "id": 0,
         "question": "What is the main benefit of getting pre-approved before house hunting?",
         "options": [
-          "It lets you skip closing costs",
-          "It locks in a mortgage rate",
-          "It shows sellers you’re a serious buyer",
-          "It guarantees the lowest interest rate"
+            "It lets you skip closing costs",
+            "It locks in a mortgage rate",
+            "It shows sellers you’re a serious buyer",
+            "It guarantees the lowest interest rate"
         ],
         "correctAnswer": "It shows sellers you’re a serious buyer",
         "hint": "A pre-approval letter can strengthen your offer."
-      },
-      {
+    },
+    {
         "id": 1,
         "question": "Which professional helps you legally review contracts and resolve disputes during the homebuying process?",
         "options": [
-          "Real estate agent",
-          "Loan officer",
-          "Lawyer",
-          "Seller"
+            "Real estate agent",
+            "Loan officer",
+            "Lawyer",
+            "Seller"
         ],
         "correctAnswer": "Lawyer",
         "hint": "You’ll need this person to sign off on your closing documents."
-      },
-      {
+    },
+    {
         "id": 2,
         "question": "What does a real estate agent do for a first-time homebuyer?",
         "options": [
-          "Approves mortgage loans",
-          "Handles title transfers",
-          "Helps find and negotiate homes",
-          "Inspects the property"
+            "Approves mortgage loans",
+            "Handles title transfers",
+            "Helps find and negotiate homes",
+            "Inspects the property"
         ],
         "correctAnswer": "Helps find and negotiate homes",
         "hint": "They are your guide in touring and bidding on homes."
-      },
-      {
+    },
+    {
         "id": 3,
         "question": "Which of the following strategies can make your offer more attractive in a competitive market?",
         "options": [
-          "Ask for many repairs",
-          "Offer below asking price",
-          "Include a personal note to the seller",
-          "Skip pre-approval"
+            "Ask for many repairs",
+            "Offer below asking price",
+            "Include a personal note to the seller",
+            "Skip pre-approval"
         ],
         "correctAnswer": "Include a personal note to the seller",
         "hint": "A thoughtful approach can sway emotional sellers."
-      },
-      {
+    },
+    {
         "id": 4,
         "question": "Which type of mortgage offers the lowest interest rate but results in higher monthly payments?",
         "options": [
-          "30-Year Fixed",
-          "15-Year Fixed",
-          "Rent",
+            "30-Year Fixed",
+            "15-Year Fixed",
+            "Rent",
         ],
         "correctAnswer": "15-Year Fixed",
         "hint": "The rate is about 6.25% annually."
-      },
-      {
+    },
+    {
         "id": 5,
         "question": "At what stage do you typically sign closing documents and pay final costs?",
         "options": [
-          "After touring homes",
-          "When making your offer",
-          "During final mortgage approval",
-          "When closing the sale"
+            "After touring homes",
+            "When making your offer",
+            "During final mortgage approval",
+            "When closing the sale"
         ],
         "correctAnswer": "When closing the sale",
         "hint": "This is the last step before the home becomes officially yours."
-      }
+    }
 ]
 
 quiz_summary = {
@@ -267,6 +288,7 @@ mortgage_options = [
     }
 ]
 
+
 # ========== ROUTES ==========
 
 @app.route('/')
@@ -289,6 +311,7 @@ def quiz_page(qid):
     question = quiz_data[qid]
     return render_template("quiz.html", question=question, qid=qid, user_data=user_data)
 
+
 @app.route('/quiz/result')
 def quiz_result():
     score = 0
@@ -308,43 +331,50 @@ def quiz_result():
                            user_data=user_data  # passing answers to use in result.html
                            )
 
+
 @app.route('/glossary')
 def glossary_page():
     return render_template("cheatsheet.html", cheatsheet=cheatsheet)
+
 
 @app.route("/single-or-partnered")
 def single_or_partnered():
     return render_template("single-or-partnered.html")
 
+
 @app.route("/timeline")
 def timeline():
     return render_template("timeline.html")
+
 
 @app.route("/players")
 def players():
     return render_template("players.html")
 
+
 @app.route("/players-interactive")
 def players_interactive():
     return render_template("players-interactive.html")
 
+
 @app.route('/reinforcement/<int:step_id>', methods=["GET", "POST"])
 def reinforcement_question(step_id):
-    step = learning_steps[step_id]
-    if "reinforcement_id" in step:
-        question = reinforcement_data[step["reinforcement_id"]]
-        return render_template('reinforcement.html', question=question, step_id=step_id)
-    return redirect(url_for('learning_step', step_id=step_id + 1))
+    question = reinforcement_data[step_id]
+    return render_template(
+        'reinforcement.html',
+        question=question,
+        step_id=step_id,
+    )
+
 
 @app.route('/reinforcement/<int:step_id>/answer', methods=["POST"])
 def reinforcement_answer(step_id):
-    step = learning_steps[step_id]
-    question = reinforcement_data[step["reinforcement_id"]]
+    question = reinforcement_data[step_id]
     user_answer = request.form.get("answer")
     is_correct = (user_answer == question["correctAnswer"])
 
     # Save answer if tracking
-    user_data.setdefault("reinforcement_answers", {})[str(step["reinforcement_id"])] = user_answer
+    user_data.setdefault("reinforcement_answers", {})[str(step_id)] = user_answer
 
     return render_template(
         "reinforcement_answer.html",
@@ -354,34 +384,42 @@ def reinforcement_answer(step_id):
         step_id=step_id
     )
 
+
 @app.route('/progress-timeline/<int:id>')
 def progress_timeline(id):
     return render_template("progress-timeline.html", id=id)
+
 
 @app.route('/preapproval')
 def preapproval_step():
     return render_template("step-preapproval.html")
 
+
 @app.route('/find-agent')
 def find_agent():
     return render_template("find_agent.html")
+
 
 @app.route('/make-offer')
 def make_offer():
     return render_template("make_offer.html")
 
+
 @app.route('/progress-timeline/4')
 def finalize_mort():
     return render_template("finalize_mort.html")
+
 
 @app.route('/compare')
 def compare():
     return render_template('compare.html')
 
+
 # ========== API ROUTES ==========
 @app.route('/start-learning')
 def start_learning():
     return redirect(url_for('learning_step', step_id=0))
+
 
 @app.route('/learning/<int:step_id>')
 def learning_step(step_id):
@@ -397,21 +435,26 @@ def learning_step(step_id):
         )
     return redirect(url_for('start_learning'))
 
+
 @app.route('/api/cheatsheet')
 def get_cheatsheet():
     return jsonify({"cheatsheet": cheatsheet})
+
 
 @app.route('/api/quiz')
 def get_quiz():
     return jsonify(quiz_data)
 
+
 @app.route('/api/quiz-summary')
 def get_quiz_summary():
     return jsonify(quiz_summary)
 
+
 @app.route('/api/mortgage-options')
 def get_mortgage_options():
     return jsonify(mortgage_options)
+
 
 @app.route('/test-yourself')
 def test_yourself():

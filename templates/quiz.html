@@ -25,36 +25,39 @@
 
                 <div style="margin-top: 20px; display: flex; justify-content: space-between;">
                     {% if qid > 0 %}
-                    <a href="{{ url_for('quiz_page', qid=qid - 1) }}"
-                       style="text-decoration: none; background-color: lightgrey; border: 1px solid black;
-                          color: black; padding: 8px 16px;">Back</a>
+                    <a href="{{ url_for('quiz_page', qid=qid - 1) }}"><img
+                            src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Next"
+                            style="height: 60px;"></a>
                     {% else %}
                     <div></div>
                     {% endif %}
 
-                    <button type="submit" style="padding: 8px 16px;">Next</button>
+                    <button type="submit" style="border: none; background: none; padding: 0;">
+                        <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Continue"
+                             style="height: 60px;">
+                    </button>
                 </div>
             </div>
     </form>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("quiz-form");
-    const warning = document.getElementById("warning-message");
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("quiz-form");
+        const warning = document.getElementById("warning-message");
 
-    form.addEventListener("submit", function (e) {
-        const checked = document.querySelector("input[name='answer']:checked");
+        form.addEventListener("submit", function (e) {
+            const checked = document.querySelector("input[name='answer']:checked");
 
-        if (!checked) {
-            e.preventDefault(); // Prevent form submission
-            warning.style.display = "block"; // Show warning message
-            console.log("Please select an answer."); // Log message for debugging
-        } else {
-            warning.style.display = "none"; // Hide warning message if an answer is selected
-        }
+            if (!checked) {
+                e.preventDefault(); // Prevent form submission
+                warning.style.display = "block"; // Show warning message
+                console.log("Please select an answer."); // Log message for debugging
+            } else {
+                warning.style.display = "none"; // Hide warning message if an answer is selected
+            }
+        });
     });
-});
 </script>
 
 {% endblock %}

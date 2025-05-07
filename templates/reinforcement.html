@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Quick Check: Step {{ step_id + 1 }}{% endblock %}
+{% block title %}Quick Review {% endblock %}
 
 {% block content %}
-<div class="title">Quick Check – Step {{ step_id + 1 }}</div>
+<div class="title">Quick Review</div>
 
 <div class="content">
     <form method="POST" action="{{ url_for('reinforcement_answer', step_id=step_id) }}" id="quick-check-form">
@@ -12,7 +12,7 @@
             <div class="qcard-desc">
                 <div class="options-boxes">
                     {% for option in question.options %}
-                    <input type="radio" name="answer" value="{{ option }}" id="option-{{ loop.index }}" hidden />
+                    <input type="radio" name="answer" value="{{ option }}" id="option-{{ loop.index }}" hidden/>
                     <label class="option-box" for="option-{{ loop.index }}">{{ option }}</label>
                     {% endfor %}
                 </div>
@@ -26,11 +26,15 @@
                 </div>
 
                 <div style="margin-top: 20px; display: flex; justify-content: space-between;">
-                    <a href="{{ url_for('learning_step', step_id=step_id) }}"
-                       style="text-decoration: none; background-color: lightgrey; border: 1px solid black;
-                              color: black; padding: 8px 16px;">← Back to Step</a>
+                    <a href="{{ url_for(question.back_page) }}">
+                        <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Next"
+                             style="height: 60px;">
+                    </a>
 
-                    <button type="submit" style="padding: 8px 16px;">Continue →</button>
+                    <button type="submit" style="border: none; background: none; padding: 0;">
+                        <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Continue"
+                             style="height: 60px;">
+                    </button>
                 </div>
             </div>
         </div>
@@ -38,20 +42,20 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("quick-check-form");
-    const warning = document.getElementById("warning-message");
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("quick-check-form");
+        const warning = document.getElementById("warning-message");
 
-    form.addEventListener("submit", function (e) {
-        const checked = document.querySelector("input[name='answer']:checked");
+        form.addEventListener("submit", function (e) {
+            const checked = document.querySelector("input[name='answer']:checked");
 
-        if (!checked) {
-            e.preventDefault();
-            warning.style.display = "block";
-        } else {
-            warning.style.display = "none";
-        }
+            if (!checked) {
+                e.preventDefault();
+                warning.style.display = "block";
+            } else {
+                warning.style.display = "none";
+            }
+        });
     });
-});
 </script>
 {% endblock %}

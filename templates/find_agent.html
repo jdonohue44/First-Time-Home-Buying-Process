@@ -8,85 +8,86 @@
 
 <div class="container mt-5">
 
-  <!-- Title Section with Icon -->
-  <div class="text-center mb-2">
-    <div class="d-flex justify-content-center align-items-center gap-3">
-      <img src="{{ url_for('static', filename='img/contract.png') }}"
-           alt="Contract Icon"
-           style="height: 48px; width: auto;">
-      <h2 class="mb-0 bank-title">Find an Agent & Start Looking!</h2>
+    <!-- Title Section with Icon -->
+    <div class="text-center mb-2">
+        <div class="d-flex justify-content-center align-items-center gap-3">
+            <img src="{{ url_for('static', filename='img/contract.png') }}"
+                 alt="Contract Icon"
+                 style="height: 48px; width: auto;">
+            <h2 class="mb-0 bank-title">Find an Agent & Start Looking!</h2>
+        </div>
+
+        <!-- Double underline -->
+        <div style="height: 1px; background-color: black; width: 60%; margin: 0.3rem auto;"></div>
+        <div style="height: 1px; background-color: black; width: 60%; margin: 0 auto 1rem;"></div>
+
+        <p class="lead" style="margin-top: 1rem;">Get expert help and start visiting homes that fit your budget. Your
+            agent can access off-market listings too!</p>
+
     </div>
 
-    <!-- Double underline -->
-    <div style="height: 1px; background-color: black; width: 60%; margin: 0.3rem auto;"></div>
-    <div style="height: 1px; background-color: black; width: 60%; margin: 0 auto 1rem;"></div>
+    <!-- Main row with checklist + image side-by-side -->
+    <div class="row mt-4 d-flex align-items-stretch">
 
-    <p class="lead" style="margin-top: 1rem;">Get expert help and start visiting homes that fit your budget. Your agent can access off-market listings too!</p>
+        <!-- LEFT COLUMN: Checklist -->
+        <div class="col-md-6 d-flex justify-content-center">
 
-</div>
+            <div class="checklist-container w-65">
 
-<!-- Main row with checklist + image side-by-side -->
-<div class="row mt-4 d-flex align-items-stretch">
+                <div class="checklist-inner d-flex flex-column justify-content-between h-100">
 
-    <!-- LEFT COLUMN: Checklist -->
-    <div class="col-md-6 d-flex justify-content-center">
+                    <div class="check-item">
+                        <input type="checkbox" id="step-1">
+                        <label for="step-1"><strong>Choose a Real Estate Agent</strong></label>
+                    </div>
 
-      <div class="checklist-container w-65">
+                    <div class="check-item">
+                        <input type="checkbox" id="step-2">
+                        <label for="step-2"><strong>Share pre-approval letter</strong></label>
+                    </div>
 
-            <div class="checklist-inner d-flex flex-column justify-content-between h-100">
+                    <div class="check-item">
+                        <input type="checkbox" id="step-3">
+                        <label for="step-3"><strong>Define Search Criteria</strong></label>
+                    </div>
 
-                <div class="check-item">
-                    <input type="checkbox" id="step-1">
-                    <label for="step-1"><strong>Choose a Real Estate Agent</strong></label>
+                    <div class="check-item">
+                        <input type="checkbox" id="step-4">
+                        <label for="step-4"><strong>Tour some Homes</strong></label>
+                    </div>
+
                 </div>
-                
-                <div class="check-item">
-                    <input type="checkbox" id="step-2">
-                    <label for="step-2"><strong>Share pre-approval letter</strong></label>
-                </div>
-                
-                <div class="check-item">
-                    <input type="checkbox" id="step-3">
-                    <label for="step-3"><strong>Define Search Criteria</strong></label>
-                </div>
-                
-                <div class="check-item">
-                    <input type="checkbox" id="step-4">
-                    <label for="step-4"><strong>Tour some Homes</strong></label>
-                </div>
-            
+
             </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Image -->
+        <div class="col-md-6 d-flex justify-content-start flex-column align-items-center">
+
+            <div class="image-box h-100 d-flex flex-column justify-content-center">
+                <img src="{{ url_for('static', filename='img/house-side-red.png') }}"
+                     alt="house"
+                     class="img-fluid"
+                     style="max-height: 250px;">
+            </div>
+
+            <p class="mt-2">Identify a promising house within your price range</p>
 
         </div>
 
     </div>
 
-    <!-- RIGHT COLUMN: Image -->
-    <div class="col-md-6 d-flex justify-content-start flex-column align-items-center">
+    <!-- ARROWS ALIGNED BELOW FULL ROW -->
+    <div class="arrow-nav">
 
-      <div class="image-box h-100 d-flex flex-column justify-content-center">
-        <img src="{{ url_for('static', filename='img/house-side-red.png') }}"
-             alt="house"
-             class="img-fluid"
-             style="max-height: 250px;">
-      </div>
+        <a href="{{ url_for('progress_timeline', id=2) }}">
+            <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
+        </a>
+        <a href="{{ url_for('reinforcement_question', step_id=4)}}">
+            <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
+        </a>
 
-      <p class="mt-2">Identify a promising house within your price range</p>
-      
     </div>
 
-</div>
-
-<!-- ARROWS ALIGNED BELOW FULL ROW -->
-<div class="arrow-nav">
-
-    <a href="{{ url_for('progress_timeline', id=2) }}">
-        <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
-    </a>
-    <a href="{{ url_for('make_offer') }}">
-        <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
-    </a>
-
-</div>
-
-{% endblock %}
+    {% endblock %}

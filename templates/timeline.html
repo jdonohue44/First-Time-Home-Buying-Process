@@ -37,7 +37,7 @@
 
         <!-- Left: Back Button -->
         <div class="col text-start">
-          <a href="{{ url_for('learning_step', step_id=4) }}">
+          <a href="{{ url_for('compare') }}">
             <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Previous" style="height: 60px;">
           </a>
         </div>
@@ -55,7 +55,7 @@
         <!-- Right: Take the Test Button -->
         <div class="col text-end">
           <button id="takeQuizBtn" class="btn btn-outline-danger btn-lg" style="font-family: 'Times New Roman', serif;"
-            disabled data-quiz-url="{{ url_for('quiz_page', qid=0) }}">
+            disabled data-quiz-url="{{ url_for('test_yourself') }}">
             Take the Test
           </button>
         </div>
@@ -76,7 +76,7 @@
 <script>
   $(function () {
     $("#takeQuizBtn").click(function () {
-      window.location.href = "{{ url_for('quiz_page', qid=0) }}";
+      window.location.href = "{{ url_for('test_yourself') }}";
     });
   });
 </script>
