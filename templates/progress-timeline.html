@@ -65,33 +65,33 @@
   </div>
 
   <!-- Navigation Arrows -->
-  <div class="d-flex justify-content-between align-items-center px-5 mb-5">
+  <div class="d-flex justify-content-between align-items-center px-5">
     <!-- Back Button -->
     {% if id == 1 %}
       <a href="{{ url_for('players_interactive') }}">
         <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
       </a>
     {% elif id == 2 %}
-      <a href="{{ url_for('progress_timeline', id=1) }}">
-        <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
-      </a>
+    <a href="{{ url_for('preapproval_step') }}">
+      <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
+    </a>
     {% elif id == 3 %}
-      <a href="{{ url_for('progress_timeline', id=2) }}">
+      <a href="{{ url_for('make_offer') }}">
         <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back" style="height: 60px;">
       </a>
     {% endif %}
   
     <!-- Next Button -->
     {% if id == 1 %}
-      <a href="{{ url_for('progress_timeline', id=2) }}">
+      <a href="{{ url_for('preapproval_step') }}">
         <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
       </a>
     {% elif id == 2 %}
-      <a href="{{ url_for('progress_timeline', id=3) }}">
+      <a href="{{ url_for('find_agent') }}">
         <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
       </a>
     {% elif id == 3 %}
-      <a href="{{ url_for('learning_step', step_id=0) }}">
+      <a href="{{ url_for('finalize_mort') }}">
         <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
       </a>
     {% endif %}
