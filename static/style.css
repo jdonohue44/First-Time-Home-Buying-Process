@@ -320,7 +320,7 @@ header#pagetitle {
 
 
 .timeline-slot.filled {
-    background: #ffffff;
+    /* background: #ffffff; */
     border-style: solid;
 }
 
@@ -335,7 +335,7 @@ button:disabled {
     cursor: not-allowed;
 }
 
-.step {
+/* .step {
     cursor: grab;
     margin: 8px;
     padding: 10px 16px;
@@ -344,10 +344,25 @@ button:disabled {
     border-radius: 4px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
     transition: all 0.2s;
+} */
+
+.step {
+  cursor: move; 
+  padding: 10px 16px;
+  margin: 8px;
+  background: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;         
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: none;              /* Remove heavy shadow */
+  transition: background 0.2s;
 }
 
+
 .step:hover {
-    background: #f1f3f5;
+    background: #c4c4c4;
 }
 
 .correct {
@@ -422,7 +437,7 @@ button:disabled {
     color: black;
 }
 .dropzone.active-hover {
-    background-color: #d3d3d3; 
+    background-color: #000000; 
     border: 3px dashed #000000; 
 }
 

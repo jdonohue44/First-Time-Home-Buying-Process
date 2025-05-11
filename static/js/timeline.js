@@ -11,13 +11,15 @@ const createStep = (text) => $(`<div class="step" draggable="true">${text}</div>
 
 function makeDraggable($el) {
   $el.draggable({
-    helper: "clone",
+    helper: function () {
+      const $original = $(this);
+      const $clone = $original.clone();
+      $clone.width($original.width());
+      return $clone;
+    },
     revert: "invalid",
     appendTo: 'body',
-    zIndex: 1000,
-    start: function (event, ui) {
-      ui.helper.css('width', $(this).width());  // keep size consistent
-    }
+    zIndex: 1000
   });
 }
 
@@ -54,7 +56,7 @@ $(function () {
 
   $(".timeline-slot, #steps").droppable({
     accept: ".step",
-    hoverClass: "bg-warning",
+    hoverClass: "bg-secondary",
     drop: function (event, ui) {
       const $dropped = ui.draggable.clone().removeClass("ui-draggable-dragging");
       const fromSteps = ui.draggable.parent().attr("id") === "steps";
