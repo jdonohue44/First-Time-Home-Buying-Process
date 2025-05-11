@@ -44,6 +44,20 @@
     </a>
 </nav>
 
+{% if progress and total_steps %}
+<div style="display: flex; justify-content: center; margin: 20px 0;">
+    <div style="width: 50%; background: #e0e0e0; border-radius: 5px; margin: 20px 0;">
+        <div style="width: {{ (progress / total_steps) * 100 }}%; background: #c62015; padding: 8px 0; color: white; text-align: center; border-radius: 5px;">
+            {% if progress == total_steps %}
+            Learning Completed!
+            {% else %}
+            Step {{ progress }} / {{ total_steps }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
 {% block content %}{% endblock %}
 
 <!-- Load core scripts -->

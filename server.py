@@ -96,6 +96,20 @@ reinforcement_data = [
     },
     {
         "id": 1,
+        "question": "Which of these statements is NOT part of finding an agent and starting looking?",
+        "options": [
+            "Share pre-approval letter.",
+            "Define search criteria.",
+            "Check your credit report.",
+            "Tour some homes."
+        ],
+        "correctAnswer": "Check your credit report.",
+        "hint": "This phase is about starting the actual search and working with professionals.",
+        "back_page": "find_agent",
+        "next_page": "make_offer",
+    },
+    {
+        "id": 2,
         "question": "Why is a 2+ year history of income preferred by lenders?",
         "options": [
             "To verify your identity",
@@ -108,7 +122,7 @@ reinforcement_data = [
         "redirect_to": "preapproval_step"
     },
     {
-        "id": 2,
+        "id": 3,
         "question": "What do lenders want to see in your bank statements for down payment and reserves?",
         "options": [
             "Loan repayment records",
@@ -121,7 +135,7 @@ reinforcement_data = [
         "redirect_to": "preapproval_step"
     },
     {
-        "id": 3,
+        "id": 4,
         "question": "Which of these statements is incorrect about buying with a partner?",
         "options": [
             "Combined income boosts purchasing power.",
@@ -132,20 +146,6 @@ reinforcement_data = [
         "correctAnswer": "Both credit scores and debts aren't considered.",
         "hint": "Lenders consider both applicants' credit and financials in joint applications.",
         "redirect_to": "preapproval_step"
-    },
-    {
-        "id": 4,
-        "question": "Which of these statements is NOT part of finding an agent and starting looking?",
-        "options": [
-            "Share pre-approval letter.",
-            "Define search criteria.",
-            "Check your credit report.",
-            "Tour some homes."
-        ],
-        "correctAnswer": "Check your credit report.",
-        "hint": "This phase is about starting the actual search and working with professionals.",
-        "back_page": "find_agent",
-        "next_page": "make_offer",
     }
 ]
 
@@ -288,6 +288,30 @@ mortgage_options = [
     }
 ]
 
+learning_flow = [
+    "players",
+    "players_interactive",
+    "preapproval",
+    ("reinforcement_question", 0),  # Represent unique reinforcement steps
+    "find_agent",
+    ("reinforcement_question", 1),
+    "make_offer",
+    "mortgage",
+    "compare",
+    "timeline",
+    "test_yourself"
+]
+
+
+def get_progress(endpoint_name, step_id=None):
+    try:
+        key = (endpoint_name, step_id) if step_id is not None else endpoint_name
+        step = learning_flow.index(key) + 1
+        total = len(learning_flow)
+        return step, total
+    except ValueError:
+        return None, None
+
 
 # ========== ROUTES ==========
 
@@ -344,26 +368,32 @@ def single_or_partnered():
 
 @app.route("/timeline")
 def timeline():
-    return render_template("timeline.html")
+    progress, total = get_progress("timeline")
+    return render_template("timeline.html", progress=progress, total_steps=total)
 
 
 @app.route("/players")
 def players():
-    return render_template("players.html")
+    progress, total = get_progress("players")
+    return render_template("players.html", progress=progress, total_steps=total)
 
 
 @app.route("/players-interactive")
 def players_interactive():
-    return render_template("players-interactive.html")
+    progress, total = get_progress("players_interactive")
+    return render_template("players-interactive.html", progress=progress, total_steps=total)
 
 
 @app.route('/reinforcement/<int:step_id>', methods=["GET", "POST"])
 def reinforcement_question(step_id):
+    progress, total_steps = get_progress("reinforcement_question", step_id)
     question = reinforcement_data[step_id]
     return render_template(
         'reinforcement.html',
         question=question,
         step_id=step_id,
+        progress=progress,
+        total_steps=total_steps
     )
 
 
@@ -392,27 +422,32 @@ def progress_timeline(id):
 
 @app.route('/preapproval')
 def preapproval_step():
-    return render_template("step-preapproval.html")
+    progress, total = get_progress("preapproval")
+    return render_template("step-preapproval.html", progress=progress, total_steps=total)
 
 
 @app.route('/find-agent')
 def find_agent():
-    return render_template("find_agent.html")
+    progress, total = get_progress("find_agent")
+    return render_template("find_agent.html", progress=progress, total_steps=total)
 
 
 @app.route('/make-offer')
 def make_offer():
-    return render_template("make_offer.html")
+    progress, total = get_progress("make_offer")
+    return render_template("make_offer.html", progress=progress, total_steps=total)
 
 
-@app.route('/progress-timeline/4')
+@app.route('/mortgage')
 def finalize_mort():
-    return render_template("finalize_mort.html")
+    progress, total = get_progress("mortgage")
+    return render_template("finalize_mort.html", progress=progress, total_steps=total)
 
 
 @app.route('/compare')
 def compare():
-    return render_template('compare.html')
+    progress, total = get_progress("compare")
+    return render_template('compare.html', progress=progress, total_steps=total)
 
 
 # ========== API ROUTES ==========
@@ -458,7 +493,8 @@ def get_mortgage_options():
 
 @app.route('/test-yourself')
 def test_yourself():
-    return render_template('test_yourself.html')
+    progress, total = get_progress("test_yourself")
+    return render_template('test_yourself.html', progress=progress, total_steps=total)
 
 
 # ========== LAUNCH ==========
