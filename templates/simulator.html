@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block title %}Simulation{% endblock %}
+{% block content %}
+
+<style>
+  .simulation-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
+  .btn.option-btn {
+    background-color: black;
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px 25px;
+    border-radius: 4px;
+    margin: 5px;
+    min-width: 200px;
+  }
+  .btn.option-btn:hover {
+    background-color: #333;
+  }
+  .btn.correct {
+    background-color: #c62015 !important;
+    color: white;
+  }
+  .background-red{
+    background-color: #c62015 !important;
+  }
+  .btn.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .btn-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .result-box {
+    border: 2px solid black;
+    padding: 20px;
+    margin: 40px auto 20px auto;
+    max-width: 500px;
+    text-align: center;
+    background-color: #f8f8f8;
+  }
+  hr {
+    border: 2px solid black;
+  }
+  .progress-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+</style>
+
+<div class="simulation-container">
+  <h2 class="background-red text-white text-center p-2">Negotiation Simulator</h2>
+
+  <div id="scenario-section" class="row mb-4 d-none">
+    <div class="col-md-6">
+      <div class="border p-3 bg-light">
+        <p><strong>Competitor:</strong> <span id="competitor"></span><br><small>Most buyers make 1–3 offers before landing a home.</small></p>
+        <p><strong>Rates:</strong> <span id="rates"></span><br><small>Higher rate means less competition</small></p>
+        <p><strong>Location:</strong> <span id="location"></span><br><small>Buyers might make 3+ offers before one is accepted.</small></p>
+        <p><strong>Pre-approved Amount:</strong> $<span id="preapproval"></span></p>
+      </div>
+    </div>
+    <div class="col-md-6 text-center">
+      <h3 class="fw-bold">HOUSE FOR-SALE</h3>
+      <div class="border p-4">
+        <p class="fw-bold fs-5">Current Price:</p>
+        <div class="border p-2 fs-4">$<span id="market-price"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-label">Negotiation Bar</div>
+  <div class="progress mb-4">
+    <div id="negotiationBar" class="progress-bar bg-dark" style="width: 0%"></div>
+  </div>
+
+  <div id="question-container"></div>
+  <div id="result-container"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+let currentQuestion = 0;
+let score = 0;
+let scenario = null;
+let questions = [];
+let maxScore = 0;
+
+function calculateMaxScore() {
+  maxScore = questions.reduce((total, q, idx) => {
+    return total + (idx === 0 || idx === 2 ? 2 : 1);
+  }, 0);
+}
+
+function updateBar() {
+  const percent = Math.min((score / maxScore) * 100, 100);
+  $('#negotiationBar').css('width', percent + '%');
+}
+
+function renderQuestion() {
+  const q = questions[currentQuestion];
+  const html = `<div class="mb-3 text-center"><strong>${q.text}</strong></div>` +
+    `<div class="btn-container">` +
+    q.values.map(val =>
+      `<button class="btn option-btn" data-answer="${val}">${val}</button>`
+    ).join(" ") +
+    `</div>`;
+  $('#question-container').html(html);
+}
+
+function showResult() {
+  const passed = score >= maxScore / 2;
+  const resultText = passed ? "You won the deal!" : "You lost the deal.";
+  const html = `
+    <div class="result-box">
+      <h4>${resultText}</h4>
+      <p>Your Score: ${score}/${maxScore}</p>
+      <a href="/simulation" class="btn btn-outline-dark mt-3">Try Another Scenario</a>
+      <a href="{{ url_for('progress_timeline', id=3) }}" class="btn btn-dark mt-3 ms-2">Next Lesson</a>
+    </div>
+  `;
+  $('#result-container').html(html);
+}
+
+function loadScenario() {
+  $.getJSON("/api/scenario", function (data) {
+    scenario = data;
+    questions = scenario.questions;
+
+    calculateMaxScore();
+
+    $('#competitor').text("5 people");
+    $('#rates').text(`${scenario.mortgage_rate}% (30 yrs Fixed)`);
+    $('#location').text(scenario.location);
+    $('#market-price').text(scenario.list_price.toLocaleString());
+    $('#preapproval').text(scenario.preapproval.toLocaleString());
+    $('#scenario-section').removeClass('d-none');
+
+    renderQuestion();
+  });
+}
+
+$(document).on('click', '.option-btn', function () {
+  const selected = $(this).data('answer');
+  const correct = questions[currentQuestion].correct;
+
+  $('.option-btn').each(function () {
+    const val = $(this).data('answer');
+    if (val == correct) {
+      $(this).addClass('correct');
+    } else {
+      $(this).addClass('disabled');
+    }
+    $(this).prop('disabled', true);
+  });
+
+  if (selected == correct) {
+    score += (currentQuestion === 0 || currentQuestion === 2 ? 2 : 1);
+  }
+  updateBar();
+
+  setTimeout(() => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      renderQuestion();
+    } else {
+      $('#question-container').html("");
+      showResult();
+    }
+  }, 900);
+});
+
+$(document).ready(function () {
+  loadScenario();
+});
+</script>
+
+{% endblock %}

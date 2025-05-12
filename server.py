@@ -6,9 +6,10 @@ from flask import render_template
 from flask_cors import CORS
 from flask import Response, request, jsonify, redirect, url_for
 from datetime import datetime
+import random
 
 app = Flask(__name__)
-CORS(app, origins=["http://127.0.0.1:5000", "http://localhost:5000"])
+CORS(app, origins=["http://127.0.0.1:5000", "http://localhost:8000"])
 
 # ========== IN-MEMORY USER DATA ==========
 user_data = {
@@ -302,6 +303,176 @@ learning_flow = [
     "test_yourself"
 ]
 
+#========SIMULATION========
+
+simulation_explained = [
+    ("Listed Price", 
+     "The starting point of negotiation. Always compare it with recent sales (comps).",
+     "A house listed at $420,000 in a neighborhood where similar homes sold for $400,000 may be overpriced."),
+    
+    ("Seller Info", 
+     "Understand the seller's motivations, such as urgency or flexibility.",
+     "A seller relocating for work in two weeks might accept a lower offer for a faster closing."),
+    
+    ("Competitor Info", 
+     "Knowing if others are bidding helps gauge how aggressive you should be.",
+     "If another buyer has already made a full-price offer, you may need to go above asking or use an escalation clause."),
+    
+    ("Preapproval", 
+     "Your budget and credibility. A strong preapproval strengthens your offer.",
+     "Being preapproved for $450,000 when offering $430,000 shows you're financially prepared."),
+    
+    ("Location & Market Heat", 
+     "Hot markets need fast, often higher bids. Cold ones offer room to negotiate.",
+     "In a hot city market, homes sell in days, while in a rural area, homes may sit for months."),
+    
+    ("Mortgage Rates", 
+     "Higher rates affect affordability and may cool buyer competition.",
+     "At a 7% interest rate, fewer buyers qualify, giving you more leverage.")
+]
+
+scenarios = [
+    {
+        "id": 1,
+        "list_price": 420000,
+        "seller_info": "Needs to relocate in 4 weeks, prefers quick close",
+        "competition": "One other offer, full asking price",
+        "preapproval": 430000,
+        "location": "Suburban NJ, very hot market",
+        "mortgage_rate": 7.1,
+        "questions": [
+            {
+                "key": "offer_options",
+                "text": "Choose your offer:",
+                "values": [410000, 420000, 425000],
+                "correct": 425000
+            },
+            {
+                "key": "escalation_clause",
+                "text": "Escalation Clause?",
+                "values": ["Yes (up to $435K)", "No"],
+                "correct": "Yes (up to $435K)"
+            },
+            {
+                "key": "closing_speed",
+                "text": "Preferred Closing Speed:",
+                "values": ["30 days", "45 days"],
+                "correct": "30 days"
+            },
+            {
+                "key": "mortgage_type",
+                "text": "Mortgage Type:",
+                "values": ["Fixed-rate 30yr", "Adjustable-rate (5/1 ARM)"],
+                "correct": "Fixed-rate 30yr"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "list_price": 315000,
+        "seller_info": "Elderly owner downsizing, open to flexible offers",
+        "competition": "No current offers, home has been on market for 40 days",
+        "preapproval": 340000,
+        "location": "Upstate NY, cooling market",
+        "mortgage_rate": 6.5,
+        "questions": [
+            {
+                "key": "offer_options",
+                "text": "Choose your offer:",
+                "values": [300000, 310000, 315000],
+                "correct": 310000
+            },
+            {
+                "key": "escalation_clause",
+                "text": "Escalation Clause?",
+                "values": ["Yes (up to $320K)", "No"],
+                "correct": "No"
+            },
+            {
+                "key": "closing_speed",
+                "text": "Preferred Closing Speed:",
+                "values": ["30 days", "60 days"],
+                "correct": "60 days"
+            },
+            {
+                "key": "mortgage_type",
+                "text": "Mortgage Type:",
+                "values": ["Fixed-rate 15yr", "Adjustable-rate (5/1 ARM)"],
+                "correct": "Adjustable-rate (5/1 ARM)"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "list_price": 560000,
+        "seller_info": "Investor selling a recently flipped home, wants high price",
+        "competition": "Three offers already, one over asking",
+        "preapproval": 580000,
+        "location": "Austin, TX, fast-growing market",
+        "mortgage_rate": 6.8,
+        "questions": [
+            {
+                "key": "offer_options",
+                "text": "Choose your offer:",
+                "values": [555000, 560000, 570000],
+                "correct": 570000
+            },
+            {
+                "key": "escalation_clause",
+                "text": "Escalation Clause?",
+                "values": ["Yes (up to $585K)", "No"],
+                "correct": "Yes (up to $585K)"
+            },
+            {
+                "key": "closing_speed",
+                "text": "Preferred Closing Speed:",
+                "values": ["20 days", "45 days"],
+                "correct": "20 days"
+            },
+            {
+                "key": "mortgage_type",
+                "text": "Mortgage Type:",
+                "values": ["Fixed-rate 30yr", "Fixed-rate 20yr"],
+                "correct": "Fixed-rate 30yr"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "list_price": 265000,
+        "seller_info": "Divorcing couple wants quick sale, open to negotiation",
+        "competition": "One lowball offer rejected last week",
+        "preapproval": 280000,
+        "location": "Rural Pennsylvania, slow market",
+        "mortgage_rate": 7.3,
+        "questions": [
+            {
+                "key": "offer_options",
+                "text": "Choose your offer:",
+                "values": [250000, 260000, 265000],
+                "correct": 260000
+            },
+            {
+                "key": "escalation_clause",
+                "text": "Escalation Clause?",
+                "values": ["Yes (up to $270K)", "No"],
+                "correct": "No"
+            },
+            {
+                "key": "closing_speed",
+                "text": "Preferred Closing Speed:",
+                "values": ["30 days", "50 days"],
+                "correct": "30 days"
+            },
+            {
+                "key": "mortgage_type",
+                "text": "Mortgage Type:",
+                "values": ["Fixed-rate 20yr", "Adjustable-rate (7/1 ARM)"],
+                "correct": "Fixed-rate 20yr"
+            }
+        ]
+    }
+]
 
 def get_progress(endpoint_name, step_id=None):
     try:
@@ -448,6 +619,20 @@ def finalize_mort():
 def compare():
     progress, total = get_progress("compare")
     return render_template('compare.html', progress=progress, total_steps=total)
+
+@app.route("/simulator_info")
+def simulator_info():
+    return render_template("simulator_info.html", simulation_explained=simulation_explained)
+
+@app.route("/simulation")
+def simulation():
+    return render_template("simulator.html")
+
+@app.route("/api/scenario")
+def get_scenario():
+    scenario = random.choice(scenarios)
+    return jsonify(scenario)
+
 
 
 # ========== API ROUTES ==========
