@@ -77,13 +77,13 @@
     <div class="col-2"></div>
   </div>
 
-  <div class="d-flex justify-content-between mt-4 mb-5 align-items-center" style="padding: 0% 2.5%">
+  <div class="d-flex justify-content-between mt-4 mb-4 align-items-center" style="padding: 0% 2.5%">
     <a href="{{ url_for('players') }}">
       <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Previous" style="height: 60px;">
     </a>
     <div class="d-flex gap-2">
       <button id="resetButton" class="btn btn-lg btn-secondary">Reset</button>
-      <button id="checkButton" class="btn btn-lg background-red" disabled>Check Answers</button>
+      <button id="checkButton" class="btn btn-lg background-red" disabled style="color: white;">Check Answers</button>
     </div>       
     <a href="{{ url_for('progress_timeline', id=1) }}">
       <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next" style="height: 60px;">
