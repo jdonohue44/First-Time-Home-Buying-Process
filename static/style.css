@@ -381,6 +381,14 @@ button:disabled {
   transition: background 0.2s;
 }
 
+#steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 100%;
+  min-width: 300px; /* prevents over-collapse with 1 item */
+}
 
 .step:hover {
     background: #c4c4c4;
