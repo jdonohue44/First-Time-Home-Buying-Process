@@ -27,7 +27,7 @@
     </div>
 
     <div style="margin-top: 3rem; width: 700px; display: flex;flex-direction: column; align-items: center; justify-content: center; margin: 0 auto;">
-        <h2 style="font-family: 'Times New Roman', serif;">Your Answers</h2>
+        <h2 style="font-family: 'Times New Roman', serif; margin-top: 1.5em;">Your Answers</h2>
         <ul style="list-style-type: none; padding: 0;">
             {% for q in quiz_data %}
                 {% set user_answer = user_data["quiz_answers"].get(q["id"] | string) %}
