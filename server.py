@@ -205,7 +205,6 @@ quiz_data = [
         "options": [
             "30-Year Fixed",
             "15-Year Fixed",
-            "Rent",
         ],
         "correctAnswer": "15-Year Fixed",
         "hint": "The rate is about 6.25% annually."
