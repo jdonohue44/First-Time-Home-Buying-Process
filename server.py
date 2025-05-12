@@ -623,6 +623,7 @@ def simulation():
 @app.route("/api/scenario")
 def get_scenario():
     scenario = random.choice(scenarios)
+    scenario["image_url"] = url_for("static", filename=f"img/house{scenario['id']}.jpg")
     return jsonify(scenario)
 
 

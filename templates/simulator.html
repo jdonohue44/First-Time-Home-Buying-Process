@@ -24,7 +24,7 @@
     background-color: #c62015 !important;
     color: white;
   }
-  .background-red{
+  .background-red {
     background-color: #c62015 !important;
   }
   .btn.disabled {
@@ -51,6 +51,14 @@
     margin-bottom: 5px;
     text-align: center;
   }
+  #house-image {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
 </style>
 
 <div class="simulation-container">
@@ -67,6 +75,7 @@
     </div>
     <div class="col-md-6 text-center">
       <h3 class="fw-bold">HOUSE FOR-SALE</h3>
+      <img id="house-image" src="" alt="House Image">
       <div class="border p-4">
         <p class="fw-bold fs-5">Current Price:</p>
         <div class="border p-2 fs-4">$<span id="market-price"></span></div>
@@ -139,8 +148,9 @@ function loadScenario() {
     $('#location').text(scenario.location);
     $('#market-price').text(scenario.list_price.toLocaleString());
     $('#preapproval').text(scenario.preapproval.toLocaleString());
-    $('#scenario-section').removeClass('d-none');
+    $('#house-image').attr('src', scenario.image_url);
 
+    $('#scenario-section').removeClass('d-none');
     renderQuestion();
   });
 }
