@@ -25,12 +25,17 @@ function makeDraggable($el) {
 
 function renderStepBank() {
   $("#steps").empty();
-  correctOrder.forEach(text => {
+  
+  // Shuffle steps before rendering
+  const shuffledOrder = [...correctOrder].sort(() => Math.random() - 0.5);
+
+  shuffledOrder.forEach(text => {
     const $step = createStep(text);
     $("#steps").append($step);
     makeDraggable($step);
   });
 }
+
 
 function resetTimeline() {
   $(".timeline-slot").each(function () {
