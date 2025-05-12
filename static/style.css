@@ -575,7 +575,7 @@ input[type="radio"] {
 
 .redfin-btn {
     align-items: center;
-    background-color: #c62015;
+    background-color: #7b0800;
     color: #ffffff;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -588,7 +588,7 @@ input[type="radio"] {
   }
   
   .redfin-btn:hover {
-    background-color: #801919;
+    background-color: #a50000;
     color: #fff;
   }
   
