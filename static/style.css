@@ -1,8 +1,7 @@
 /* General body and page styles */
 body {
     margin: 0;
-    font-family: 'Times New Roman', serif;
-    background-color: rgba(240, 240, 240, 0.9) !important;
+    background-color: white !important;
 }
 
 header#pagetitle {
@@ -16,24 +15,23 @@ header#pagetitle {
     position: relative;
     z-index: 2;
 }
-
 .pnavbar {
-    background-color: #d3d3d3;
-    display: flex;
-    justify-content: flex-start;
-    gap: 2rem;
-    padding: 1rem 0;
-    position: relative;
-    border-top: 0.5px solid black;
-    border-bottom: 0.5px solid black;
+  background-color: rgb(231, 231, 231);
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0.2rem 0;
+  position: relative;
+  border-top: 1px double #999;
+  border-bottom: 1px double #999;
 }
 
 .pnavbar a {
-    font-family: 'Times New Roman', serif;
-    text-decoration: none;
-    color: black;
-    font-size: 1.5rem;
-    padding-left: 2rem;
+  font-family: 'Times New Roman', serif;
+  text-decoration: none;
+  color: black;
+  font-size: 1.25rem; /* Slightly smaller font size */
+  padding-left: 1rem;  /* Reduced left padding */
 }
 
 .title {
@@ -61,7 +59,7 @@ header#pagetitle {
 
 /* Hover effect */
 .pcard:hover {
-    background-color: rgba(198, 32, 21, 0.17);
+    background-color: #c62015;
     cursor: pointer;
 }
 
@@ -155,6 +153,27 @@ header#pagetitle {
     animation: panFromRight 0.2s forwards;
 }
 
+#expanded-text {
+  background-color: #ffffff; /* White background */
+  border: 1px solid #ccc;    /* Light gray border */
+  border-radius: 0;          /* Rectangular edges */
+  padding: 20px;             /* Inner spacing */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  max-width: 800px;          /* Optional: limit width */
+  margin: 0 auto;            /* Center the card horizontally */
+}
+
+#expanded-text ul {
+  list-style-type: disc;     /* Standard bullet points */
+  padding-left: 20px;        /* Space between bullet and content */
+  font-size: 1.2rem;         /* Increase font size */
+  line-height: 2;            /* Increase vertical spacing */
+  margin: 0;                 /* Remove default margins */
+}
+
+#expanded-text li {
+  margin-bottom: 12px;       /* Space between list items */
+}
 
 /*Quiz*/
 .qcard {
@@ -271,7 +290,7 @@ header#pagetitle {
 }
 
 .active-step {
-    background-color: #fe2424;
+    background-color: #c62015;
     color: white;
     border-radius: 6px;
     font-weight: bold;
@@ -291,7 +310,9 @@ header#pagetitle {
     opacity: 0.6;
 }
 
-
+.background-red{
+    background-color: #c62015 !important;
+}
 .timeline-background {
     position: absolute;
     top: 50%;
@@ -371,7 +392,7 @@ button:disabled {
 }
 
 .incorrect {
-    border-color: #dc3545 !important;
+    border-color: #c62015 !important;
     background-color: #f8d7da !important;
 }
 
@@ -390,7 +411,7 @@ button:disabled {
 }
 
 .player-desc {
-    background-color: rgba(198, 32, 21, 0.17);
+    background-color: lightgray;
     padding: 20px;
     min-height: 200px;
     min-width: 200px;
@@ -398,39 +419,42 @@ button:disabled {
     align-content: center;
     border: black 1px solid;
 }
-
-.dropzone {
-    min-height: 170px;
-    background-color: #f8f9fa;
-    border: 2px dashed #ccc;
-    border-radius: 5px;
-    margin-top: 5px;
-    padding: 5px;
-    font-size: 14px;
-    color: #999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%; 
-    max-width: 250px;
-}
+.dropzone,
 .draggable-desc {
-    background-color: #666;
-    color: white;
-    padding: 10px;
-    cursor: move;
-    min-width: 200px;
-    border: black 1px solid;
-    align-content: center;
-    min-height: 170px;
-    justify-content: center;
-    align-items: center;
+  min-height: 170px;
+  width: 100%;
+  max-width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-size: 14px;
 }
+
+/* Specific styles for .dropzone */
+.dropzone {
+  background-color: #f8f9fa;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  color: #999;
+  padding: 0;
+}
+
+/* Specific styles for .draggable-desc */
+.draggable-desc {
+  background-color: #666;
+  color: white;
+  padding: 10px;
+  cursor: move;
+  border: 1px solid black;
+}
+
 .correct {
     border: 5px solid green;
 }
 .incorrect {
-    border: 5px solid red;
+    border: 5px solid #c62015;
 }
 .dropzone.dropped {
     background-color: #ffffff;
@@ -551,7 +575,7 @@ input[type="radio"] {
 
 .redfin-btn {
     align-items: center;
-    background-color: #a02020;
+    background-color: #c62015;
     color: #ffffff;
     padding: 0.5rem 1rem;
     border-radius: 5px;

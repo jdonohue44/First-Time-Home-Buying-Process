@@ -303,7 +303,7 @@ learning_flow = [
     "test_yourself"
 ]
 
-#========SIMULATION========
+#======================SIMULATION======================
 
 simulation_explained = [
     ("Listed Price", 

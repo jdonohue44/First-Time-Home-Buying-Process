@@ -9,12 +9,12 @@
   <div class="col-6"><hr></div>
   <div class="col-3"></div>
 </div>
-
 <div class="row justify-content-center align-items-center flex-column-reverse flex-md-row text-center text-md-start mb-5">
-  <!-- Buttons Column (bottom on mobile, left on desktop) -->
-  <div class="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-end mt-4 mt-md-0" style="padding-right:0;">
+  <!-- Buttons Column -->
+  <div class="col-2"></div>
+  <div class="col-2 d-flex flex-column align-items-center align-items-md-end gap-3 mt-2 mt-md-0" style="padding-right:0;">
     <a href="{{ url_for('single_or_partnered') }}" 
-       class="btn btn-lg mb-4" 
+       class="btn btn-lg" 
        role="button"
        style="
        font-family: 'Times New Roman', Times, serif; 
@@ -23,13 +23,12 @@
        color: white; 
        border: #c62015 1px solid; 
        width: 230px; 
-       font-size: 1.5em; 
-       align-content: center;">
+       font-size: 1.5em;">
        Learn the steps
     </a>
     
     <a href="{{ url_for('quiz_page', qid=0) }}" 
-       class="btn btn-lg mt-4" 
+       class="btn btn-lg" 
        role="button"
        style="
        font-family: 'Times New Roman', Times, serif; 
@@ -38,17 +37,21 @@
        color: white; 
        border: black 1px solid; 
        width: 230px; 
-       font-size: 1.5em; 
-       align-content: center;">
+       font-size: 1.5em;">
        Test your readiness
     </a>
   </div>
 
-  <!-- Image Column (top on mobile, right on desktop) -->
-  <div class="col-12 col-md-8 d-flex justify-content-center" style="padding-left: 0;">
-    <img src="{{ url_for('static', filename='img/house-side-red-no-bg-sm.png') }}" class="img-fluid" style="max-width: 70%;" alt="House For Sale">
+  <!-- Image Column -->
+  <div class="col-6 d-flex justify-content-center mb-3 mb-md-0" style="padding-left: 0;">
+    <img src="{{ url_for('static', filename='img/house-side-red-no-bg-sm.png') }}" 
+         class="img-fluid" 
+         style="max-width: 100%; height: auto;" 
+         alt="House For Sale">
   </div>
+  <div class="col-2"></div>
 </div>
+
 
 {% endblock %}
 
