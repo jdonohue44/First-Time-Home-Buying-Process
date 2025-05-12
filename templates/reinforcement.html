@@ -3,7 +3,7 @@
 {% block content %}
 <div class="title">Quick Review</div>
 
-<div class="content">
+<div class="content" style="margin-bottom: 60px;">
     <form method="POST" action="{{ url_for('reinforcement_question', step_id=step_id) }}" id="quick-check-form">
         <div class="qcard" style="width: 600px;">
             <div class="qcard-title">{{ question.question }}</div>
