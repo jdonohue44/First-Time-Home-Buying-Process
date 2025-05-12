@@ -83,13 +83,13 @@
     </div>
   </div>
 
-  <div class="progress-label">Negotiation Bar</div>
-  <div class="progress mb-4">
-    <div id="negotiationBar" class="progress-bar bg-dark" style="width: 0%"></div>
+  <div class="progress-label" style="font-size: 1.3em;">Negotiation Bar</div>
+  <div class="progress mb-4" style="height: 30px;">
+    <div id="negotiationBar" class="progress-bar bg-dark" style="width: 0%; font-size: 1.1em;"></div>
   </div>
 
-  <div id="question-container"></div>
-  <div id="result-container"></div>
+  <div id="question-container" style="font-size: 1.2em;"></div>
+  <div id="result-container" style="font-size: 1.2em;"></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -108,8 +108,18 @@ function calculateMaxScore() {
 
 function updateBar() {
   const percent = Math.min((score / maxScore) * 100, 100);
-  $('#negotiationBar').css('width', percent + '%');
+  const bar = $('#negotiationBar');
+
+  bar.css('width', percent + '%');
+
+  // Change color based on score
+  if (score >= 3) {
+    bar.removeClass('bg-dark').addClass('background-red');
+  } else {
+    bar.removeClass('background-red').addClass('bg-dark');
+  }
 }
+
 
 function renderQuestion() {
   const q = questions[currentQuestion];
