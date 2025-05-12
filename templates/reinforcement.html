@@ -1,40 +1,73 @@
 {% extends "base.html" %}
-
-{% block title %}Quick Review {% endblock %}
-
+{% block title %}Quick Review{% endblock %}
 {% block content %}
 <div class="title">Quick Review</div>
 
 <div class="content">
-    <form method="POST" action="{{ url_for('reinforcement_answer', step_id=step_id) }}" id="quick-check-form">
+    <form method="POST" action="{{ url_for('reinforcement_question', step_id=step_id) }}" id="quick-check-form">
         <div class="qcard" style="width: 600px;">
             <div class="qcard-title">{{ question.question }}</div>
             <div class="qcard-desc">
+
+                {% if user_answer is not none %}
+                    <div style="font-weight: bold; margin-bottom: 10px; font-size:20px">
+                        {% if is_correct %}
+                            ✅ Correct!
+                        {% else %}
+                            ❌ Wrong. The correct answer is shown in red.
+                        {% endif %}
+                    </div>
+                {% endif %}
+
                 <div class="options-boxes">
                     {% for option in question.options %}
-                    <input type="radio" name="answer" value="{{ option }}" id="option-{{ loop.index }}" hidden/>
-                    <label class="option-box" for="option-{{ loop.index }}">{{ option }}</label>
+                    {% set selected = (user_answer == option) %}
+                    {% set is_correct_answer = (option == question.correctAnswer) %}
+                    <input type="radio" name="answer" value="{{ option }}" id="option-{{ loop.index }}" hidden
+                           {% if selected %} checked {% endif %}/>
+
+                    <label class="option-box"
+                           for="option-{{ loop.index }}"
+                           style="
+                             {% if user_answer is not none and is_correct_answer %}color: red; font-weight: bold;{% endif %}
+                             {% if selected %} border: 2px solid black; {% endif %}
+                           ">
+                        {{ option }}
+                    </label>
                     {% endfor %}
                 </div>
 
-                <!-- Optional hint -->
                 <p class="text-muted" style="margin-top: 16px;"><em>💡 Hint: {{ question.hint }}</em></p>
 
-                <!-- Optional warning message -->
                 <div id="warning-message" style="color: #c62015; font-weight: bold; margin-top: 20px; display: none;">
                     ⚠️ Please select an option before continuing.
                 </div>
 
                 <div style="margin-top: 20px; display: flex; justify-content: space-between;">
                     <a href="{{ url_for(question.back_page) }}">
-                        <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Next"
+                        <img src="{{ url_for('static', filename='img/left-arrow.png') }}" alt="Back"
                              style="height: 60px;">
                     </a>
 
-                    <button type="submit" style="border: none; background: none; padding: 0;">
-                        <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Continue"
-                             style="height: 60px;">
-                    </button>
+                    {% if user_answer is not none %}
+                        {% if 'progress_timeline' in question.next_page %}
+                        <a href="{{ url_for(question.next_page, id=question.timeline_id) }}">
+                            <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next"
+                                 style="height: 60px;">
+                        </a>
+                        {% else %}
+                        <a href="{{ url_for(question.next_page) }}">
+                            <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Next"
+                                 style="height: 60px;">
+                        </a>
+                        {% endif %}
+                    {% else %}
+                        <!-- Disabled arrow until an answer is submitted -->
+                        <a href="#" id="submit-trigger">
+                            <img src="{{ url_for('static', filename='img/right-arrow.png') }}" alt="Submit"
+                                 style="height: 60px; opacity: 0.5; cursor: pointer;">
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -44,18 +77,14 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("quick-check-form");
-        const warning = document.getElementById("warning-message");
+        const radios = document.querySelectorAll("input[name='answer']");
 
-        form.addEventListener("submit", function (e) {
-            const checked = document.querySelector("input[name='answer']:checked");
-
-            if (!checked) {
-                e.preventDefault();
-                warning.style.display = "block";
-            } else {
-                warning.style.display = "none";
-            }
+        radios.forEach(function (radio) {
+            radio.addEventListener("change", function () {
+                form.submit();
+            });
         });
     });
 </script>
+
 {% endblock %}

@@ -554,35 +554,27 @@ def players_interactive():
     progress, total = get_progress("players_interactive")
     return render_template("players-interactive.html", progress=progress, total_steps=total)
 
-
 @app.route('/reinforcement/<int:step_id>', methods=["GET", "POST"])
 def reinforcement_question(step_id):
     progress, total_steps = get_progress("reinforcement_question", step_id)
     question = reinforcement_data[step_id]
+
+    user_answer = None
+    is_correct = None
+
+    if request.method == "POST":
+        user_answer = request.form.get("answer")
+        is_correct = (user_answer == question["correctAnswer"])
+        user_data.setdefault("reinforcement_answers", {})[str(step_id)] = user_answer
+
     return render_template(
         'reinforcement.html',
         question=question,
         step_id=step_id,
         progress=progress,
-        total_steps=total_steps
-    )
-
-
-@app.route('/reinforcement/<int:step_id>/answer', methods=["POST"])
-def reinforcement_answer(step_id):
-    question = reinforcement_data[step_id]
-    user_answer = request.form.get("answer")
-    is_correct = (user_answer == question["correctAnswer"])
-
-    # Save answer if tracking
-    user_data.setdefault("reinforcement_answers", {})[str(step_id)] = user_answer
-
-    return render_template(
-        "reinforcement_answer.html",
-        question=question,
+        total_steps=total_steps,
         user_answer=user_answer,
-        is_correct=is_correct,
-        step_id=step_id
+        is_correct=is_correct
     )
 
 
