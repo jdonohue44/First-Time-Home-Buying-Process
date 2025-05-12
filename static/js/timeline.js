@@ -1,6 +1,6 @@
 const correctOrder = [
+    "Get Approval",
   "Find a Real Estate Agent",
-  "Get Approval",
   "Tour Homes",
   "Make an Offer",
   "Finalize a Mortgage",
